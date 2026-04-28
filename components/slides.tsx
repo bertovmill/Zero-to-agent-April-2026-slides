@@ -541,9 +541,9 @@ function MakersLoungeLogo({ large }: { large?: boolean }) {
     <Image 
       src="/logos/makerslounge-wordmark-white.svg" 
       alt="MakersLounge" 
-      width={large ? 240 : 160} 
-      height={large ? 40 : 28}
-      className={large ? "h-10 w-auto" : "h-7 w-auto"}
+      width={large ? 200 : 130} 
+      height={large ? 48 : 32}
+      className={large ? "h-12 w-auto" : "h-8 w-auto"}
     />
   )
 }
