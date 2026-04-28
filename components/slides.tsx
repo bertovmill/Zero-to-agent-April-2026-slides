@@ -189,24 +189,34 @@ function MCIntroSlide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <div className="w-32 h-32 rounded-full bg-card border-2 border-primary mb-8 overflow-hidden flex items-center justify-center">
-        <span className="text-4xl font-bold text-primary">B</span>
+      <div className="w-40 h-40 rounded-full border-2 border-primary mb-8 overflow-hidden">
+        <Image 
+          src="/images/berto-headshot.jpeg" 
+          alt="Berto" 
+          width={160} 
+          height={160}
+          className="w-full h-full object-cover"
+        />
       </div>
       
-      <h2 className="text-4xl md:text-5xl font-bold mb-2">Berto</h2>
-      <p className="text-xl text-muted-foreground mb-8">Your MC for Tonight</p>
+      <h2 className="text-5xl md:text-6xl font-bold mb-2">Berto</h2>
+      <p className="text-2xl text-muted-foreground mb-10">Your MC for Tonight</p>
 
-      <div className="flex flex-col gap-4 max-w-lg text-left">
-        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-          <p>Co-founder of MakersLounge - building community for Toronto builders</p>
+      <div className="flex flex-col gap-4 max-w-xl text-left">
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">Co-founder of MakersLounge - building community for Toronto builders</p>
         </div>
-        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-          <p>Passionate about helping people go from idea to shipped product</p>
+<div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">Passionate about helping people go from idea to shipped product</p>
         </div>
-        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">These slides? Built in v0 in under 5 minutes</p>
+        </div>
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
           <p>These slides were built in v0 in under 5 minutes</p>
         </div>
       </div>
