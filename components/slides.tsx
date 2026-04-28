@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import { ChevronLeft, ChevronRight, Clock, MapPin, Calendar, Users, Zap, BookOpen, Heart, Sparkles, Laptop, Rocket, Wifi, Github, Import, Type, ImageIcon, Palette, FolderTree, FileText, Plug, ShieldCheck, Mic } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { QRCodeSVG } from "qrcode.react"
+import Image from "next/image"
 
 const WIFI_NETWORK = "WeWork"
 const WIFI_PASSWORD = "Ask at front desk"
@@ -518,24 +519,28 @@ function VercelLogo({ large }: { large?: boolean }) {
 }
 
 function RootlyLogo({ large }: { large?: boolean }) {
-  const size = large ? "text-4xl" : "text-2xl"
+  const height = large ? 48 : 32
+  const width = large ? 200 : 130
   return (
-    <div className={`${size} font-bold flex items-center gap-2`}>
-      <span className="text-foreground">rootly</span>
-      <span className="text-muted-foreground font-light italic">ai</span>
-    </div>
+    <Image 
+      src="/logos/rootly-white.svg" 
+      alt="Rootly AI" 
+      width={width} 
+      height={height}
+      className={large ? "h-12 w-auto" : "h-8 w-auto"}
+    />
   )
 }
 
 function MakersLoungeLogo({ large }: { large?: boolean }) {
-  const iconSize = large ? "h-10 w-10" : "h-6 w-6"
-  const textSize = large ? "text-3xl" : "text-xl"
+  const size = large ? 80 : 48
   return (
-    <div className="flex items-center gap-2">
-      <svg className={`${iconSize} text-primary`} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-      </svg>
-      <span className={`${textSize} font-medium`}>makerslounge</span>
-    </div>
+    <Image 
+      src="/logos/makerslounge.png" 
+      alt="MakersLounge" 
+      width={size} 
+      height={size}
+      className={large ? "h-20 w-20 rounded-xl" : "h-12 w-12 rounded-lg"}
+    />
   )
 }
