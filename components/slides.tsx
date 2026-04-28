@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button"
 import { QRCodeSVG } from "qrcode.react"
 import Image from "next/image"
 
-const WIFI_NETWORK = "WeWork"
-const WIFI_PASSWORD = "Ask at front desk"
+const WIFI_NETWORK = "Rootly Guest"
+const WIFI_PASSWORD = "rootlyguest"
 
 const slides = [
   { id: "title", component: TitleSlide, time: "5:30 PM", label: "Check-in" },
@@ -110,9 +110,11 @@ export function Slides() {
 
 function WifiBadge() {
   return (
-    <div className="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border text-sm">
+    <div className="absolute top-6 right-6 flex items-center gap-3 px-4 py-2 rounded-full bg-card border border-border text-sm">
       <Wifi className="h-4 w-4 text-primary" />
-      <span className="text-muted-foreground">{WIFI_NETWORK}</span>
+      <span className="text-foreground font-medium">{WIFI_NETWORK}</span>
+      <span className="text-muted-foreground">|</span>
+      <span className="text-muted-foreground">{WIFI_PASSWORD}</span>
     </div>
   )
 }
