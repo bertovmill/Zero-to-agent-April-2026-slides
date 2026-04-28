@@ -1,17 +1,26 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { ChevronLeft, ChevronRight, Clock, MapPin, Calendar, Users, Zap, BookOpen, Heart, Sparkles, Laptop, Lightbulb, Rocket } from "lucide-react"
+import { ChevronLeft, ChevronRight, Clock, MapPin, Calendar, Users, Zap, BookOpen, Heart, Sparkles, Laptop, Rocket, Wifi, Github, Import, Type, ImageIcon, Palette, FolderTree, FileText, Plug, ShieldCheck, Mic } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { QRCodeSVG } from "qrcode.react"
+import Image from "next/image"
+
+const WIFI_NETWORK = "WeWork"
+const WIFI_PASSWORD = "Ask at front desk"
 
 const slides = [
-  { id: "title", component: TitleSlide },
-  { id: "agenda", component: AgendaSlide },
-  { id: "zero-to-agent", component: ZeroToAgentSlide },
-  { id: "rootly", component: RootlySlide },
-  { id: "makerslounge", component: MakersLoungeSlide },
-  { id: "lets-build", component: LetsBuildSlide },
+  { id: "title", component: TitleSlide, time: "5:30 PM", label: "Check-in" },
+  { id: "agenda", component: AgendaSlide, time: "5:30 PM", label: "Check-in" },
+  { id: "mc-intro", component: MCIntroSlide, time: "6:00 PM", label: "Intros" },
+  { id: "makerslounge", component: MakersLoungeSlide, time: "6:00 PM", label: "Intros" },
+  { id: "rootly", component: RootlySlide, time: "6:00 PM", label: "Intros" },
+  { id: "philip", component: PhilipSlide, time: "6:15 PM", label: "Talk + Q&A" },
+  { id: "v0-part-1", component: V0Part1Slide, time: "6:45 PM", label: "v0 Demo" },
+  { id: "v0-part-2", component: V0Part2Slide, time: "6:45 PM", label: "v0 Demo" },
+  { id: "lets-build", component: LetsBuildSlide, time: "6:45 PM", label: "Build Time" },
+  { id: "demo-time", component: DemoTimeSlide, time: "7:45 PM", label: "Demos" },
+  { id: "thank-you", component: ThankYouSlide, time: "8:30 PM", label: "Wrap-up" },
 ]
 
 export function Slides() {
@@ -40,6 +49,8 @@ export function Slides() {
   }, [nextSlide, prevSlide])
 
   const CurrentSlideComponent = slides[currentSlide].component
+  const currentTime = slides[currentSlide].time
+  const currentLabel = slides[currentSlide].label
 
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-background">
@@ -47,6 +58,11 @@ export function Slides() {
       <div className="h-full w-full">
         <CurrentSlideComponent />
       </div>
+      
+      {/* Timeline - shown on all slides except title */}
+      {slides[currentSlide].id !== "title" && (
+        <Timeline currentLabel={currentLabel} />
+      )}
 
       {/* Navigation */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4">
@@ -92,43 +108,113 @@ export function Slides() {
   )
 }
 
+function WifiBadge() {
+  return (
+    <div className="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border text-sm">
+      <Wifi className="h-4 w-4 text-primary" />
+      <span className="text-muted-foreground">{WIFI_NETWORK}</span>
+    </div>
+  )
+}
+
+const timelineCheckpoints = [
+  { time: "5:30", label: "Check-in" },
+  { time: "6:00", label: "Intros" },
+  { time: "6:15", label: "Talk" },
+  { time: "6:45", label: "Build" },
+  { time: "7:45", label: "Demos" },
+  { time: "8:30", label: "End" },
+]
+
+function Timeline({ currentLabel }: { currentLabel: string }) {
+  // Find which checkpoint is active based on the label
+  const getCheckpointIndex = (label: string) => {
+    const labelMap: Record<string, number> = {
+      "Check-in": 0,
+      "Intros": 1,
+      "Talk + Q&A": 2,
+      "v0 Demo": 3,
+      "Build Time": 3,
+      "Demos": 4,
+      "Wrap-up": 5,
+    }
+    return labelMap[label] ?? 0
+  }
+  
+  const activeIndex = getCheckpointIndex(currentLabel)
+
+  return (
+    <div className="absolute top-6 left-6 right-6 flex items-center justify-center">
+      <div className="flex items-center gap-1 px-4 py-2 rounded-full bg-card/80 backdrop-blur border border-border">
+        {timelineCheckpoints.map((checkpoint, index) => {
+          const isActive = index === activeIndex
+          const isPast = index < activeIndex
+          
+          return (
+            <div key={checkpoint.time} className="flex items-center">
+              {/* Checkpoint */}
+              <div className="flex flex-col items-center">
+                <div className={`flex items-center gap-1.5 px-2 py-1 rounded-full transition-all ${
+                  isActive 
+                    ? "bg-primary text-primary-foreground" 
+                    : isPast 
+                      ? "text-muted-foreground" 
+                      : "text-muted-foreground/50"
+                }`}>
+                  <span className={`text-xs font-medium ${isActive ? "" : ""}`}>{checkpoint.time}</span>
+                  <span className={`text-xs ${isActive ? "font-medium" : "hidden md:inline"}`}>{checkpoint.label}</span>
+                </div>
+              </div>
+              
+              {/* Connector line */}
+              {index < timelineCheckpoints.length - 1 && (
+                <div className={`w-4 md:w-8 h-0.5 mx-1 ${
+                  isPast ? "bg-muted-foreground/50" : "bg-border"
+                }`} />
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 function TitleSlide() {
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center">
-      {/* Logos row */}
-      <div className="flex items-center gap-6 mb-12">
-        <VercelLogo />
-        <span className="text-muted-foreground text-2xl">×</span>
+    <div className="h-full flex flex-col px-12 py-10 relative">
+      {/* Top header bar */}
+      <div className="flex items-center gap-4">
+        <VercelTriangle className="h-4 w-4" />
+        <span className="text-muted-foreground font-mono text-sm tracking-wider">02A/GLOBAL BUILD WEEK</span>
+      </div>
+
+      {/* Center content */}
+      <div className="flex-1 flex items-center">
+        <div className="flex items-end gap-8">
+          <h1 className="text-7xl md:text-9xl leading-none">
+            <span className="italic text-muted-foreground font-light">Zero to </span>
+            <span className="pixel-text text-foreground">Agent</span>
+          </h1>
+          <VercelTriangle className="h-20 w-20 md:h-28 md:w-28 mb-4" />
+        </div>
+      </div>
+
+      {/* Bottom info bar */}
+      <div className="flex justify-between items-end">
+        <div className="font-mono text-muted-foreground tracking-wider">
+          <p className="text-lg">05.01.26</p>
+        </div>
+        <div className="font-mono text-muted-foreground tracking-wider text-right">
+          <p className="text-lg">TORONTO/CAN</p>
+        </div>
+      </div>
+
+      {/* Sponsors footer */}
+      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-8">
         <RootlyLogo />
-        <span className="text-muted-foreground text-2xl">×</span>
+        <span className="text-muted-foreground">x</span>
         <MakersLoungeLogo />
-      </div>
-
-      <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-6">
-        Zero to <span className="text-primary">Agent</span>
-      </h1>
-      
-      <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
-        Build and launch real AI agents in under two hours
-      </p>
-
-      <div className="flex flex-wrap items-center justify-center gap-6 text-muted-foreground">
-        <div className="flex items-center gap-2">
-          <MapPin className="h-5 w-5 text-primary" />
-          <span>Toronto</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Calendar className="h-5 w-5 text-primary" />
-          <span>Thursday, May 1st</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Clock className="h-5 w-5 text-primary" />
-          <span>5:30 PM - 8:30 PM</span>
-        </div>
-      </div>
-
-      <div className="mt-12 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm">
-        Part of Vercel Global Build Week
       </div>
     </div>
   )
@@ -136,13 +222,16 @@ function TitleSlide() {
 
 function AgendaSlide() {
   const agendaItems = [
-    { time: "5:30 - 6:30 PM", title: "Check-in & Networking", description: "Food & drinks provided", icon: Users },
-    { time: "6:30 - 7:30 PM", title: "Hands-on Building", description: "Build with v0", icon: Laptop },
-    { time: "7:30 - 8:30 PM", title: "Demos & Wrap-up", description: "Show what you built", icon: Rocket },
+    { time: "5:30 - 6:00 PM", title: "Check-in & Networking", description: "Food, drinks & intros", icon: Users },
+    { time: "6:15 - 6:45 PM", title: "Filip Hasson (Vercel)", description: "Talk + Q&A", icon: Mic },
+    { time: "6:45 - 7:45 PM", title: "Hands-on Building", description: "Build with v0", icon: Laptop },
+    { time: "7:45 - 8:30 PM", title: "Demos & Wrap-up", description: "Show what you built", icon: Rocket },
   ]
 
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8">
+    <div className="h-full flex flex-col items-center justify-center px-8 relative">
+      <WifiBadge />
+      
       <h2 className="text-4xl md:text-5xl font-bold mb-12">Tonight&apos;s Agenda</h2>
       
       <div className="w-full max-w-2xl space-y-6">
@@ -166,74 +255,37 @@ function AgendaSlide() {
   )
 }
 
-function ZeroToAgentSlide() {
+function MCIntroSlide() {
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center">
-      <div className="mb-8">
-        <VercelLogo large />
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="w-40 h-40 rounded-full border-2 border-primary mb-8 overflow-hidden">
+        <Image 
+          src="/images/berto-headshot.jpeg" 
+          alt="Berto" 
+          width={160} 
+          height={160}
+          className="w-full h-full object-cover"
+        />
       </div>
       
-      <h2 className="text-4xl md:text-5xl font-bold mb-6">Global Build Week</h2>
-      
-      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
-        A global initiative bringing together builders from cities around the world to design, build, and deploy AI agents.
-      </p>
+      <h2 className="text-5xl md:text-6xl font-bold mb-2">Berto</h2>
+      <p className="text-2xl text-muted-foreground mb-10">Your MC for Tonight</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl w-full">
-        <div className="p-6 rounded-2xl bg-card border border-border text-center">
-          <p className="text-3xl font-bold text-primary mb-2">April 24 - May 3</p>
-          <p className="text-muted-foreground">Competition Window</p>
+      <div className="flex flex-col gap-4 max-w-xl text-left">
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">Co-founder of MakersLounge - building community for Toronto builders</p>
         </div>
-        <div className="p-6 rounded-2xl bg-card border border-border text-center">
-          <p className="text-3xl font-bold text-primary mb-2">$6,000+</p>
-          <p className="text-muted-foreground">In Prizes</p>
+<div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">Passionate about helping people go from idea to shipped product</p>
         </div>
-        <div className="p-6 rounded-2xl bg-card border border-border text-center">
-          <p className="text-3xl font-bold text-primary mb-2">Global</p>
-          <p className="text-muted-foreground">Community Recognition</p>
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">These slides? Built in v0 in under 5 minutes</p>
         </div>
-      </div>
-
-      <p className="mt-10 text-muted-foreground">
-        Submit your projects to the global competition for prizes and visibility
-      </p>
-    </div>
-  )
-}
-
-function RootlySlide() {
-  return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center">
-      <div className="mb-8">
-        <RootlyLogo large />
-      </div>
-      
-      <h2 className="text-4xl md:text-5xl font-bold mb-6">AI SRE Agents</h2>
-      
-      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
-        The AI-native on-call and incident response platform that resolves your hardest incidents faster.
-      </p>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl w-full mb-10">
-        {["Root Cause Analysis", "Pattern Detection", "Always-on Copilot", "Continuous Improvement"].map((feature) => (
-          <div key={feature} className="p-4 rounded-xl bg-card border border-border">
-            <p className="text-sm font-medium">{feature}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="flex flex-wrap justify-center gap-4 text-muted-foreground text-sm">
-        <span>LinkedIn</span>
-        <span>•</span>
-        <span>NVIDIA</span>
-        <span>•</span>
-        <span>Replit</span>
-        <span>•</span>
-        <span>Canva</span>
-        <span>•</span>
-        <span>Figma</span>
-        <span>•</span>
-        <span>Dropbox</span>
       </div>
     </div>
   )
@@ -248,7 +300,9 @@ function MakersLoungeSlide() {
   ]
 
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center">
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
       <div className="mb-8">
         <MakersLoungeLogo large />
       </div>
@@ -274,25 +328,167 @@ function MakersLoungeSlide() {
   )
 }
 
-function LetsBuildSlide() {
+function RootlySlide() {
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center">
-      <h2 className="text-5xl md:text-7xl font-bold mb-6">Let&apos;s Build!</h2>
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
       
-      <p className="text-xl text-muted-foreground max-w-xl mb-10">
-        Scan to register and submit your project
+      <div className="mb-8">
+        <RootlyLogo large />
+      </div>
+      
+      <h2 className="text-4xl md:text-5xl font-bold mb-6">AI SRE Agents</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+        On-call and incident response platform that brings AI and modern teams together to prevent and resolve incidents faster.
       </p>
 
-      <div className="p-6 bg-white rounded-2xl mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl w-full mb-10">
+        {["Root Cause Analysis", "Pattern Detection", "Always-on Copilot", "Continuous Improvement"].map((feature) => (
+          <div key={feature} className="p-4 rounded-xl bg-card border border-border">
+            <p className="text-sm font-medium">{feature}</p>
+          </div>
+        ))}
+      </div>
+
+      <p className="text-sm text-muted-foreground mb-4">Trusted by</p>
+      <div className="flex flex-wrap justify-center gap-6 text-muted-foreground">
+        <span className="font-medium">LinkedIn</span>
+        <span className="font-medium">NVIDIA</span>
+        <span className="font-medium">Replit</span>
+        <span className="font-medium">Canva</span>
+        <span className="font-medium">Figma</span>
+        <span className="font-medium">Dropbox</span>
+      </div>
+    </div>
+  )
+}
+
+function PhilipSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="w-44 h-44 rounded-full border-2 border-primary mb-8 overflow-hidden">
+        <Image 
+          src="/images/philip-headshot.jpeg" 
+          alt="Philip" 
+          width={176} 
+          height={176}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      
+      <h2 className="text-5xl md:text-6xl font-bold mb-2">Philip</h2>
+      <p className="text-2xl text-primary mb-2">Vercel</p>
+      <p className="text-xl text-muted-foreground mb-10">Flying in from Brazil for tonight!</p>
+
+      <div className="flex flex-col gap-4 max-w-xl text-left">
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">Developer Relations at Vercel</p>
+        </div>
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">Deep expertise in v0 and AI-powered development</p>
+        </div>
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">20 min talk + Q&A</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function V0Part1Slide() {
+  const features = [
+    { icon: Github, title: "Import from GitHub", description: "Bring existing repos into v0" },
+    { icon: Import, title: "Create from Figma", description: "Turn designs into code" },
+    { icon: Type, title: "Generate Text", description: "AI-powered copy writing" },
+    { icon: ImageIcon, title: "Generate Images", description: "Create visuals on the fly" },
+  ]
+
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="mb-4">
+        <VercelLogo large />
+      </div>
+      <p className="text-xl text-muted-foreground mb-8">v0 Quick Start - Part 1</p>
+      <p className="text-sm text-primary mb-8">Presented by Hakan</p>
+      
+      <div className="grid grid-cols-2 gap-6 max-w-2xl w-full">
+        {features.map((feature) => (
+          <div key={feature.title} className="p-6 rounded-2xl bg-card border border-border text-left">
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+              <feature.icon className="h-6 w-6 text-primary" />
+            </div>
+            <h3 className="font-semibold mb-1">{feature.title}</h3>
+            <p className="text-sm text-muted-foreground">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function V0Part2Slide() {
+  const features = [
+    { icon: Palette, title: "Design System", description: "Consistent theming & styles" },
+    { icon: FolderTree, title: "Folder Structure", description: "Organized project layout" },
+    { icon: FileText, title: "Instructions/Rules", description: "Custom AI behavior" },
+    { icon: Plug, title: "MCP Integrations", description: "Connect external tools" },
+    { icon: ShieldCheck, title: "Ask Permission", description: "Control what v0 can do" },
+  ]
+
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="mb-4">
+        <VercelLogo large />
+      </div>
+      <p className="text-xl text-muted-foreground mb-8">v0 Quick Start - Part 2</p>
+      <p className="text-sm text-primary mb-8">Presented by Berto</p>
+      
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl w-full">
+        {features.map((feature) => (
+          <div key={feature.title} className="p-5 rounded-2xl bg-card border border-border text-left">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+              <feature.icon className="h-5 w-5 text-primary" />
+            </div>
+            <h3 className="font-semibold mb-1 text-sm">{feature.title}</h3>
+            <p className="text-xs text-muted-foreground">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function LetsBuildSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <h2 className="text-5xl md:text-7xl font-bold mb-4">Let&apos;s Build!</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-xl mb-8">
+        Scan for $30 free credits and to submit your project
+      </p>
+
+      <div className="p-6 bg-white rounded-2xl mb-6">
         <QRCodeSVG 
           value="https://zerotoagent.dev/event/RbeBMcn9EPsyxEld"
-          size={200}
+          size={180}
           level="H"
           includeMargin={false}
         />
       </div>
 
-      <p className="text-sm text-muted-foreground mb-10">
+      <p className="text-sm text-muted-foreground mb-8">
         zerotoagent.dev/event/RbeBMcn9EPsyxEld
       </p>
 
@@ -313,42 +509,113 @@ function LetsBuildSlide() {
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <span className="text-primary font-bold">3</span>
           </div>
-          <p>Deploy and demo at 7:30!</p>
+          <p>Submit 15 min before demos!</p>
+        </div>
+      </div>
+
+      <p className="mt-6 text-sm text-muted-foreground">
+        Berto is available to help first-timers!
+      </p>
+    </div>
+  )
+}
+
+function DemoTimeSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mb-8">
+        <Mic className="h-12 w-12 text-primary" />
+      </div>
+      
+      <h2 className="text-5xl md:text-7xl font-bold mb-6">Demo Time!</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-xl mb-10">
+        Who wants to show what they built?
+      </p>
+
+      <div className="flex flex-col gap-4 max-w-md w-full">
+        <div className="p-6 rounded-2xl bg-card border border-border">
+          <p className="text-lg font-semibold mb-2">First come, first serve</p>
+          <p className="text-muted-foreground">Raise your hand when ready</p>
+        </div>
+        <div className="p-6 rounded-2xl bg-card border border-border">
+          <p className="text-lg font-semibold mb-2">2-3 minutes each</p>
+          <p className="text-muted-foreground">Show us the highlights</p>
         </div>
       </div>
     </div>
   )
 }
 
+function ThankYouSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <h2 className="text-5xl md:text-7xl font-bold mb-8">Thank You!</h2>
+      
+      {/* Logos row */}
+      <div className="flex items-center gap-6 mb-10">
+        <VercelLogo />
+        <span className="text-muted-foreground text-2xl">x</span>
+        <RootlyLogo />
+        <span className="text-muted-foreground text-2xl">x</span>
+        <MakersLoungeLogo />
+      </div>
+
+      <p className="text-xl text-muted-foreground max-w-xl mb-12">
+        Keep building. Keep shipping. Stay connected.
+      </p>
+
+      <p className="text-lg text-muted-foreground">
+        Submit your projects to the global competition for $6,000+ in prizes!
+      </p>
+    </div>
+  )
+}
+
 // Logo Components
+function VercelTriangle({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 76 65" fill="currentColor">
+      <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
+    </svg>
+  )
+}
+
 function VercelLogo({ large }: { large?: boolean }) {
   const size = large ? "h-12" : "h-8"
   return (
-    <svg className={size} viewBox="0 0 283 64" fill="currentColor">
+  <svg className={size} viewBox="0 0 283 64" fill="currentColor">
       <path d="M141.04 16c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.46 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zM248.72 16c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.45 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zM200.24 34c0 6 3.92 10 10 10 4.12 0 7.21-1.87 8.8-4.92l7.68 4.43c-3.18 5.3-9.14 8.49-16.48 8.49-11.05 0-19-7.2-19-18s7.96-18 19-18c7.34 0 13.29 3.19 16.48 8.49l-7.68 4.43c-1.59-3.05-4.68-4.92-8.8-4.92-6.07 0-10 4-10 10zm82.48-29v46h-9V5h9zM36.95 0L73.9 64H0L36.95 0zm92.38 5l-27.71 48L73.91 5H84.3l17.32 30 17.32-30h10.39zm58.91 12v9.69c-1-.29-2.06-.49-3.2-.49-5.81 0-10 4-10 10v14.8h-9V17h9v9.2c0-5.08 5.91-9.2 13.2-9.2z"/>
     </svg>
   )
 }
 
 function RootlyLogo({ large }: { large?: boolean }) {
-  const size = large ? "text-4xl" : "text-2xl"
+  const height = large ? 56 : 40
+  const width = large ? 240 : 160
   return (
-    <div className={`${size} font-bold flex items-center gap-2`}>
-      <span className="text-foreground">rootly</span>
-      <span className="text-muted-foreground font-light">ai</span>
-    </div>
+    <Image 
+      src="/logos/rootly-white.svg" 
+      alt="Rootly AI" 
+      width={width} 
+      height={height}
+      className={large ? "h-14 w-auto" : "h-10 w-auto"}
+    />
   )
 }
 
 function MakersLoungeLogo({ large }: { large?: boolean }) {
-  const iconSize = large ? "h-10 w-10" : "h-6 w-6"
-  const textSize = large ? "text-3xl" : "text-xl"
   return (
-    <div className="flex items-center gap-2">
-      <svg className={`${iconSize} text-primary`} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-      </svg>
-      <span className={`${textSize} font-medium`}>makerslounge</span>
-    </div>
+    <Image 
+      src="/logos/makerslounge-wordmark-white.svg" 
+      alt="MakersLounge" 
+      width={large ? 240 : 160} 
+      height={large ? 56 : 40}
+      className={large ? "h-14 w-auto" : "h-10 w-auto"}
+    />
   )
 }

@@ -47,7 +47,24 @@ export default function AppendixPage() {
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-4 border-b border-border pb-2">MakersLounge Logos</h2>
-        <p className="text-muted-foreground">Awaiting logos...</p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="p-6 rounded-xl bg-card border border-border">
+            <h3 className="text-lg font-medium mb-4">App Icon / Luma Logo</h3>
+            <div className="bg-zinc-900 p-8 rounded-lg flex items-center justify-center mb-4">
+              <Image 
+                src="/logos/makerslounge.png" 
+                alt="MakersLounge Logo" 
+                width={120} 
+                height={120}
+                className="h-24 w-24 rounded-xl"
+              />
+            </div>
+            <div className="text-sm text-muted-foreground space-y-1">
+              <p>PNG: <code className="bg-secondary px-2 py-0.5 rounded">/logos/makerslounge.png</code></p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="mb-12">
