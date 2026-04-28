@@ -533,14 +533,13 @@ function RootlyLogo({ large }: { large?: boolean }) {
 }
 
 function MakersLoungeLogo({ large }: { large?: boolean }) {
-  const size = large ? 80 : 48
   return (
     <Image 
-      src="/logos/makerslounge.png" 
+      src="/logos/makerslounge-wordmark-white.svg" 
       alt="MakersLounge" 
-      width={size} 
-      height={size}
-      className={large ? "h-20 w-20 rounded-xl" : "h-12 w-12 rounded-lg"}
+      width={large ? 240 : 160} 
+      height={large ? 40 : 28}
+      className={large ? "h-10 w-auto" : "h-7 w-auto"}
     />
   )
 }
