@@ -298,26 +298,32 @@ function PhilipSlide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <div className="w-32 h-32 rounded-full bg-card border-2 border-primary mb-8 overflow-hidden flex items-center justify-center">
-        <span className="text-4xl font-bold text-primary">P</span>
+      <div className="w-44 h-44 rounded-full border-2 border-primary mb-8 overflow-hidden">
+        <Image 
+          src="/images/philip-headshot.jpeg" 
+          alt="Philip" 
+          width={176} 
+          height={176}
+          className="w-full h-full object-cover"
+        />
       </div>
       
-      <h2 className="text-4xl md:text-5xl font-bold mb-2">Philip</h2>
-      <p className="text-xl text-primary mb-2">Vercel</p>
-      <p className="text-muted-foreground mb-8">Flying in from Brazil for tonight!</p>
+      <h2 className="text-5xl md:text-6xl font-bold mb-2">Philip</h2>
+      <p className="text-2xl text-primary mb-2">Vercel</p>
+      <p className="text-xl text-muted-foreground mb-10">Flying in from Brazil for tonight!</p>
 
-      <div className="flex flex-col gap-4 max-w-lg text-left">
-        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-          <p>Developer Relations at Vercel</p>
+      <div className="flex flex-col gap-4 max-w-xl text-left">
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">Developer Relations at Vercel</p>
         </div>
-        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-          <p>Deep expertise in v0 and AI-powered development</p>
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">Deep expertise in v0 and AI-powered development</p>
         </div>
-        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-          <p>20 min talk + Q&A</p>
+        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
+          <p className="text-lg">20 min talk + Q&A</p>
         </div>
       </div>
     </div>
