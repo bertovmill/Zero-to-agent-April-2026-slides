@@ -1,17 +1,25 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { ChevronLeft, ChevronRight, Clock, MapPin, Calendar, Users, Zap, BookOpen, Heart, Sparkles, Laptop, Lightbulb, Rocket } from "lucide-react"
+import { ChevronLeft, ChevronRight, Clock, MapPin, Calendar, Users, Zap, BookOpen, Heart, Sparkles, Laptop, Rocket, Wifi, Github, Import, Type, ImageIcon, Palette, FolderTree, FileText, Plug, ShieldCheck, Mic } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { QRCodeSVG } from "qrcode.react"
+
+const WIFI_NETWORK = "WeWork"
+const WIFI_PASSWORD = "Ask at front desk"
 
 const slides = [
   { id: "title", component: TitleSlide },
   { id: "agenda", component: AgendaSlide },
-  { id: "zero-to-agent", component: ZeroToAgentSlide },
-  { id: "rootly", component: RootlySlide },
+  { id: "mc-intro", component: MCIntroSlide },
   { id: "makerslounge", component: MakersLoungeSlide },
+  { id: "rootly", component: RootlySlide },
+  { id: "philip", component: PhilipSlide },
+  { id: "v0-part-1", component: V0Part1Slide },
+  { id: "v0-part-2", component: V0Part2Slide },
   { id: "lets-build", component: LetsBuildSlide },
+  { id: "demo-time", component: DemoTimeSlide },
+  { id: "thank-you", component: ThankYouSlide },
 ]
 
 export function Slides() {
@@ -92,15 +100,26 @@ export function Slides() {
   )
 }
 
+function WifiBadge() {
+  return (
+    <div className="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border text-sm">
+      <Wifi className="h-4 w-4 text-primary" />
+      <span className="text-muted-foreground">{WIFI_NETWORK}</span>
+    </div>
+  )
+}
+
 function TitleSlide() {
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center">
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
       {/* Logos row */}
       <div className="flex items-center gap-6 mb-12">
         <VercelLogo />
-        <span className="text-muted-foreground text-2xl">×</span>
+        <span className="text-muted-foreground text-2xl">x</span>
         <RootlyLogo />
-        <span className="text-muted-foreground text-2xl">×</span>
+        <span className="text-muted-foreground text-2xl">x</span>
         <MakersLoungeLogo />
       </div>
 
@@ -115,7 +134,7 @@ function TitleSlide() {
       <div className="flex flex-wrap items-center justify-center gap-6 text-muted-foreground">
         <div className="flex items-center gap-2">
           <MapPin className="h-5 w-5 text-primary" />
-          <span>Toronto</span>
+          <span>240 Richmond St W, Toronto</span>
         </div>
         <div className="flex items-center gap-2">
           <Calendar className="h-5 w-5 text-primary" />
@@ -136,13 +155,15 @@ function TitleSlide() {
 
 function AgendaSlide() {
   const agendaItems = [
-    { time: "5:30 - 6:30 PM", title: "Check-in & Networking", description: "Food & drinks provided", icon: Users },
+    { time: "5:30 - 6:30 PM", title: "Check-in & Networking", description: "Food, drinks & intros", icon: Users },
     { time: "6:30 - 7:30 PM", title: "Hands-on Building", description: "Build with v0", icon: Laptop },
     { time: "7:30 - 8:30 PM", title: "Demos & Wrap-up", description: "Show what you built", icon: Rocket },
   ]
 
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8">
+    <div className="h-full flex flex-col items-center justify-center px-8 relative">
+      <WifiBadge />
+      
       <h2 className="text-4xl md:text-5xl font-bold mb-12">Tonight&apos;s Agenda</h2>
       
       <div className="w-full max-w-2xl space-y-6">
@@ -166,74 +187,31 @@ function AgendaSlide() {
   )
 }
 
-function ZeroToAgentSlide() {
+function MCIntroSlide() {
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center">
-      <div className="mb-8">
-        <VercelLogo large />
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="w-32 h-32 rounded-full bg-card border-2 border-primary mb-8 overflow-hidden flex items-center justify-center">
+        <span className="text-4xl font-bold text-primary">B</span>
       </div>
       
-      <h2 className="text-4xl md:text-5xl font-bold mb-6">Global Build Week</h2>
-      
-      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
-        A global initiative bringing together builders from cities around the world to design, build, and deploy AI agents.
-      </p>
+      <h2 className="text-4xl md:text-5xl font-bold mb-2">Berto</h2>
+      <p className="text-xl text-muted-foreground mb-8">Your MC for Tonight</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl w-full">
-        <div className="p-6 rounded-2xl bg-card border border-border text-center">
-          <p className="text-3xl font-bold text-primary mb-2">April 24 - May 3</p>
-          <p className="text-muted-foreground">Competition Window</p>
+      <div className="flex flex-col gap-4 max-w-lg text-left">
+        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
+          <p>Co-founder of MakersLounge - building community for Toronto builders</p>
         </div>
-        <div className="p-6 rounded-2xl bg-card border border-border text-center">
-          <p className="text-3xl font-bold text-primary mb-2">$6,000+</p>
-          <p className="text-muted-foreground">In Prizes</p>
+        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
+          <p>Passionate about helping people go from idea to shipped product</p>
         </div>
-        <div className="p-6 rounded-2xl bg-card border border-border text-center">
-          <p className="text-3xl font-bold text-primary mb-2">Global</p>
-          <p className="text-muted-foreground">Community Recognition</p>
+        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
+          <p>These slides were built in v0 in under 5 minutes</p>
         </div>
-      </div>
-
-      <p className="mt-10 text-muted-foreground">
-        Submit your projects to the global competition for prizes and visibility
-      </p>
-    </div>
-  )
-}
-
-function RootlySlide() {
-  return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center">
-      <div className="mb-8">
-        <RootlyLogo large />
-      </div>
-      
-      <h2 className="text-4xl md:text-5xl font-bold mb-6">AI SRE Agents</h2>
-      
-      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
-        The AI-native on-call and incident response platform that resolves your hardest incidents faster.
-      </p>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl w-full mb-10">
-        {["Root Cause Analysis", "Pattern Detection", "Always-on Copilot", "Continuous Improvement"].map((feature) => (
-          <div key={feature} className="p-4 rounded-xl bg-card border border-border">
-            <p className="text-sm font-medium">{feature}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="flex flex-wrap justify-center gap-4 text-muted-foreground text-sm">
-        <span>LinkedIn</span>
-        <span>•</span>
-        <span>NVIDIA</span>
-        <span>•</span>
-        <span>Replit</span>
-        <span>•</span>
-        <span>Canva</span>
-        <span>•</span>
-        <span>Figma</span>
-        <span>•</span>
-        <span>Dropbox</span>
       </div>
     </div>
   )
@@ -248,7 +226,9 @@ function MakersLoungeSlide() {
   ]
 
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center">
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
       <div className="mb-8">
         <MakersLoungeLogo large />
       </div>
@@ -274,25 +254,161 @@ function MakersLoungeSlide() {
   )
 }
 
-function LetsBuildSlide() {
+function RootlySlide() {
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center">
-      <h2 className="text-5xl md:text-7xl font-bold mb-6">Let&apos;s Build!</h2>
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
       
-      <p className="text-xl text-muted-foreground max-w-xl mb-10">
-        Scan to register and submit your project
+      <div className="mb-8">
+        <RootlyLogo large />
+      </div>
+      
+      <h2 className="text-4xl md:text-5xl font-bold mb-6">AI SRE Agents</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+        On-call and incident response platform that brings AI and modern teams together to prevent and resolve incidents faster.
       </p>
 
-      <div className="p-6 bg-white rounded-2xl mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl w-full mb-10">
+        {["Root Cause Analysis", "Pattern Detection", "Always-on Copilot", "Continuous Improvement"].map((feature) => (
+          <div key={feature} className="p-4 rounded-xl bg-card border border-border">
+            <p className="text-sm font-medium">{feature}</p>
+          </div>
+        ))}
+      </div>
+
+      <p className="text-sm text-muted-foreground mb-4">Trusted by</p>
+      <div className="flex flex-wrap justify-center gap-6 text-muted-foreground">
+        <span className="font-medium">LinkedIn</span>
+        <span className="font-medium">NVIDIA</span>
+        <span className="font-medium">Replit</span>
+        <span className="font-medium">Canva</span>
+        <span className="font-medium">Figma</span>
+        <span className="font-medium">Dropbox</span>
+      </div>
+    </div>
+  )
+}
+
+function PhilipSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="w-32 h-32 rounded-full bg-card border-2 border-primary mb-8 overflow-hidden flex items-center justify-center">
+        <span className="text-4xl font-bold text-primary">P</span>
+      </div>
+      
+      <h2 className="text-4xl md:text-5xl font-bold mb-2">Philip</h2>
+      <p className="text-xl text-primary mb-2">Vercel</p>
+      <p className="text-muted-foreground mb-8">Flying in from Brazil for tonight!</p>
+
+      <div className="flex flex-col gap-4 max-w-lg text-left">
+        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
+          <p>Developer Relations at Vercel</p>
+        </div>
+        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
+          <p>Deep expertise in v0 and AI-powered development</p>
+        </div>
+        <div className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border">
+          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
+          <p>20 min talk + Q&A</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function V0Part1Slide() {
+  const features = [
+    { icon: Github, title: "Import from GitHub", description: "Bring existing repos into v0" },
+    { icon: Import, title: "Create from Figma", description: "Turn designs into code" },
+    { icon: Type, title: "Generate Text", description: "AI-powered copy writing" },
+    { icon: ImageIcon, title: "Generate Images", description: "Create visuals on the fly" },
+  ]
+
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="mb-4">
+        <VercelLogo large />
+      </div>
+      <p className="text-xl text-muted-foreground mb-8">v0 Quick Start - Part 1</p>
+      <p className="text-sm text-primary mb-8">Presented by Hakan</p>
+      
+      <div className="grid grid-cols-2 gap-6 max-w-2xl w-full">
+        {features.map((feature) => (
+          <div key={feature.title} className="p-6 rounded-2xl bg-card border border-border text-left">
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+              <feature.icon className="h-6 w-6 text-primary" />
+            </div>
+            <h3 className="font-semibold mb-1">{feature.title}</h3>
+            <p className="text-sm text-muted-foreground">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function V0Part2Slide() {
+  const features = [
+    { icon: Palette, title: "Design System", description: "Consistent theming & styles" },
+    { icon: FolderTree, title: "Folder Structure", description: "Organized project layout" },
+    { icon: FileText, title: "Instructions/Rules", description: "Custom AI behavior" },
+    { icon: Plug, title: "MCP Integrations", description: "Connect external tools" },
+    { icon: ShieldCheck, title: "Ask Permission", description: "Control what v0 can do" },
+  ]
+
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="mb-4">
+        <VercelLogo large />
+      </div>
+      <p className="text-xl text-muted-foreground mb-8">v0 Quick Start - Part 2</p>
+      <p className="text-sm text-primary mb-8">Presented by Berto</p>
+      
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl w-full">
+        {features.map((feature) => (
+          <div key={feature.title} className="p-5 rounded-2xl bg-card border border-border text-left">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+              <feature.icon className="h-5 w-5 text-primary" />
+            </div>
+            <h3 className="font-semibold mb-1 text-sm">{feature.title}</h3>
+            <p className="text-xs text-muted-foreground">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function LetsBuildSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <h2 className="text-5xl md:text-7xl font-bold mb-4">Let&apos;s Build!</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-xl mb-8">
+        Scan for $30 free credits and to submit your project
+      </p>
+
+      <div className="p-6 bg-white rounded-2xl mb-6">
         <QRCodeSVG 
           value="https://zerotoagent.dev/event/RbeBMcn9EPsyxEld"
-          size={200}
+          size={180}
           level="H"
           includeMargin={false}
         />
       </div>
 
-      <p className="text-sm text-muted-foreground mb-10">
+      <p className="text-sm text-muted-foreground mb-8">
         zerotoagent.dev/event/RbeBMcn9EPsyxEld
       </p>
 
@@ -313,9 +429,80 @@ function LetsBuildSlide() {
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <span className="text-primary font-bold">3</span>
           </div>
-          <p>Deploy and demo at 7:30!</p>
+          <p>Submit 15 min before demos!</p>
         </div>
       </div>
+
+      <p className="mt-6 text-sm text-muted-foreground">
+        Berto is available to help first-timers!
+      </p>
+    </div>
+  )
+}
+
+function DemoTimeSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mb-8">
+        <Mic className="h-12 w-12 text-primary" />
+      </div>
+      
+      <h2 className="text-5xl md:text-7xl font-bold mb-6">Demo Time!</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-xl mb-10">
+        Who wants to show what they built?
+      </p>
+
+      <div className="flex flex-col gap-4 max-w-md w-full">
+        <div className="p-6 rounded-2xl bg-card border border-border">
+          <p className="text-lg font-semibold mb-2">First come, first serve</p>
+          <p className="text-muted-foreground">Raise your hand when ready</p>
+        </div>
+        <div className="p-6 rounded-2xl bg-card border border-border">
+          <p className="text-lg font-semibold mb-2">2-3 minutes each</p>
+          <p className="text-muted-foreground">Show us the highlights</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ThankYouSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <h2 className="text-5xl md:text-7xl font-bold mb-8">Thank You!</h2>
+      
+      {/* Logos row */}
+      <div className="flex items-center gap-6 mb-10">
+        <VercelLogo />
+        <span className="text-muted-foreground text-2xl">x</span>
+        <RootlyLogo />
+        <span className="text-muted-foreground text-2xl">x</span>
+        <MakersLoungeLogo />
+      </div>
+
+      <p className="text-xl text-muted-foreground max-w-xl mb-10">
+        Keep building. Keep shipping. Stay connected.
+      </p>
+
+      <div className="flex flex-col gap-4 max-w-md w-full">
+        <div className="p-4 rounded-xl bg-card border border-border">
+          <p className="text-primary font-medium">@makerslounge</p>
+          <p className="text-sm text-muted-foreground">Follow us on socials</p>
+        </div>
+        <div className="p-4 rounded-xl bg-card border border-border">
+          <p className="text-primary font-medium">makerslounge.co</p>
+          <p className="text-sm text-muted-foreground">Join the community - $10/mo</p>
+        </div>
+      </div>
+
+      <p className="mt-10 text-sm text-muted-foreground">
+        Submit your projects to the global competition for $6,000+ in prizes!
+      </p>
     </div>
   )
 }
@@ -335,7 +522,7 @@ function RootlyLogo({ large }: { large?: boolean }) {
   return (
     <div className={`${size} font-bold flex items-center gap-2`}>
       <span className="text-foreground">rootly</span>
-      <span className="text-muted-foreground font-light">ai</span>
+      <span className="text-muted-foreground font-light italic">ai</span>
     </div>
   )
 }
