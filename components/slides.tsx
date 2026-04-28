@@ -215,10 +215,6 @@ function MCIntroSlide() {
           <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
           <p className="text-lg">These slides? Built in v0 in under 5 minutes</p>
         </div>
-        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
-          <p>These slides were built in v0 in under 5 minutes</p>
-        </div>
       </div>
     </div>
   )
