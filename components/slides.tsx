@@ -565,22 +565,11 @@ function ThankYouSlide() {
         <MakersLoungeLogo />
       </div>
 
-      <p className="text-xl text-muted-foreground max-w-xl mb-10">
+      <p className="text-xl text-muted-foreground max-w-xl mb-12">
         Keep building. Keep shipping. Stay connected.
       </p>
 
-      <div className="flex flex-col gap-4 max-w-md w-full">
-        <div className="p-4 rounded-xl bg-card border border-border">
-          <p className="text-primary font-medium">@makerslounge</p>
-          <p className="text-sm text-muted-foreground">Follow us on socials</p>
-        </div>
-        <div className="p-4 rounded-xl bg-card border border-border">
-          <p className="text-primary font-medium">makerslounge.co</p>
-          <p className="text-sm text-muted-foreground">Join the community - $10/mo</p>
-        </div>
-      </div>
-
-      <p className="mt-10 text-sm text-muted-foreground">
+      <p className="text-lg text-muted-foreground">
         Submit your projects to the global competition for $6,000+ in prizes!
       </p>
     </div>
