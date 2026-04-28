@@ -59,9 +59,9 @@ export function Slides() {
         <CurrentSlideComponent />
       </div>
       
-      {/* Time Badge - shown on all slides except title */}
+      {/* Timeline - shown on all slides except title */}
       {slides[currentSlide].id !== "title" && (
-        <TimeBadge time={currentTime} label={currentLabel} />
+        <Timeline currentLabel={currentLabel} />
       )}
 
       {/* Navigation */}
@@ -117,13 +117,65 @@ function WifiBadge() {
   )
 }
 
-function TimeBadge({ time, label }: { time: string; label: string }) {
+const timelineCheckpoints = [
+  { time: "5:30", label: "Check-in" },
+  { time: "6:00", label: "Intros" },
+  { time: "6:15", label: "Talk" },
+  { time: "6:45", label: "Build" },
+  { time: "7:45", label: "Demos" },
+  { time: "8:30", label: "End" },
+]
+
+function Timeline({ currentLabel }: { currentLabel: string }) {
+  // Find which checkpoint is active based on the label
+  const getCheckpointIndex = (label: string) => {
+    const labelMap: Record<string, number> = {
+      "Check-in": 0,
+      "Intros": 1,
+      "Talk + Q&A": 2,
+      "v0 Demo": 3,
+      "Build Time": 3,
+      "Demos": 4,
+      "Wrap-up": 5,
+    }
+    return labelMap[label] ?? 0
+  }
+  
+  const activeIndex = getCheckpointIndex(currentLabel)
+
   return (
-    <div className="absolute top-6 left-6 flex items-center gap-3 px-4 py-2 rounded-full bg-card border border-border text-sm">
-      <Clock className="h-4 w-4 text-primary" />
-      <span className="text-foreground font-medium">{time}</span>
-      <span className="text-muted-foreground">|</span>
-      <span className="text-muted-foreground">{label}</span>
+    <div className="absolute top-6 left-6 right-6 flex items-center justify-center">
+      <div className="flex items-center gap-1 px-4 py-2 rounded-full bg-card/80 backdrop-blur border border-border">
+        {timelineCheckpoints.map((checkpoint, index) => {
+          const isActive = index === activeIndex
+          const isPast = index < activeIndex
+          
+          return (
+            <div key={checkpoint.time} className="flex items-center">
+              {/* Checkpoint */}
+              <div className="flex flex-col items-center">
+                <div className={`flex items-center gap-1.5 px-2 py-1 rounded-full transition-all ${
+                  isActive 
+                    ? "bg-primary text-primary-foreground" 
+                    : isPast 
+                      ? "text-muted-foreground" 
+                      : "text-muted-foreground/50"
+                }`}>
+                  <span className={`text-xs font-medium ${isActive ? "" : ""}`}>{checkpoint.time}</span>
+                  <span className={`text-xs ${isActive ? "font-medium" : "hidden md:inline"}`}>{checkpoint.label}</span>
+                </div>
+              </div>
+              
+              {/* Connector line */}
+              {index < timelineCheckpoints.length - 1 && (
+                <div className={`w-4 md:w-8 h-0.5 mx-1 ${
+                  isPast ? "bg-muted-foreground/50" : "bg-border"
+                }`} />
+              )}
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
