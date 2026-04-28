@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { ChevronLeft, ChevronRight, Clock, MapPin, Calendar, Users, Zap, BookOpen, Heart, Sparkles, Laptop, Lightbulb, Rocket } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { QRCodeSVG } from "qrcode.react"
 
 const slides = [
   { id: "title", component: TitleSlide },
@@ -276,15 +277,26 @@ function MakersLoungeSlide() {
 function LetsBuildSlide() {
   return (
     <div className="h-full flex flex-col items-center justify-center px-8 text-center">
-      <Lightbulb className="h-16 w-16 text-primary mb-8" />
-      
       <h2 className="text-5xl md:text-7xl font-bold mb-6">Let&apos;s Build!</h2>
       
-      <p className="text-xl text-muted-foreground max-w-xl mb-12">
-        Bring your laptop, ideas, and curiosity.
+      <p className="text-xl text-muted-foreground max-w-xl mb-10">
+        Scan to register and submit your project
       </p>
 
-      <div className="flex flex-col gap-4 text-left max-w-md w-full">
+      <div className="p-6 bg-white rounded-2xl mb-8">
+        <QRCodeSVG 
+          value="https://zerotoagent.dev/event/RbeBMcn9EPsyxEld"
+          size={200}
+          level="H"
+          includeMargin={false}
+        />
+      </div>
+
+      <p className="text-sm text-muted-foreground mb-10">
+        zerotoagent.dev/event/RbeBMcn9EPsyxEld
+      </p>
+
+      <div className="flex flex-col gap-3 text-left max-w-md w-full">
         <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <span className="text-primary font-bold">1</span>
@@ -304,10 +316,6 @@ function LetsBuildSlide() {
           <p>Deploy and demo at 7:30!</p>
         </div>
       </div>
-
-      <p className="mt-12 text-sm text-muted-foreground">
-        WiFi • Food • Good Vibes
-      </p>
     </div>
   )
 }
