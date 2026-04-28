@@ -10,17 +10,17 @@ const WIFI_NETWORK = "WeWork"
 const WIFI_PASSWORD = "Ask at front desk"
 
 const slides = [
-  { id: "title", component: TitleSlide },
-  { id: "agenda", component: AgendaSlide },
-  { id: "mc-intro", component: MCIntroSlide },
-  { id: "makerslounge", component: MakersLoungeSlide },
-  { id: "rootly", component: RootlySlide },
-  { id: "philip", component: PhilipSlide },
-  { id: "v0-part-1", component: V0Part1Slide },
-  { id: "v0-part-2", component: V0Part2Slide },
-  { id: "lets-build", component: LetsBuildSlide },
-  { id: "demo-time", component: DemoTimeSlide },
-  { id: "thank-you", component: ThankYouSlide },
+  { id: "title", component: TitleSlide, time: "5:30 PM", label: "Check-in" },
+  { id: "agenda", component: AgendaSlide, time: "5:30 PM", label: "Check-in" },
+  { id: "mc-intro", component: MCIntroSlide, time: "6:00 PM", label: "Intros" },
+  { id: "makerslounge", component: MakersLoungeSlide, time: "6:00 PM", label: "Intros" },
+  { id: "rootly", component: RootlySlide, time: "6:00 PM", label: "Intros" },
+  { id: "philip", component: PhilipSlide, time: "6:15 PM", label: "Talk + Q&A" },
+  { id: "v0-part-1", component: V0Part1Slide, time: "6:45 PM", label: "v0 Demo" },
+  { id: "v0-part-2", component: V0Part2Slide, time: "6:45 PM", label: "v0 Demo" },
+  { id: "lets-build", component: LetsBuildSlide, time: "6:45 PM", label: "Build Time" },
+  { id: "demo-time", component: DemoTimeSlide, time: "7:45 PM", label: "Demos" },
+  { id: "thank-you", component: ThankYouSlide, time: "8:30 PM", label: "Wrap-up" },
 ]
 
 export function Slides() {
@@ -49,6 +49,8 @@ export function Slides() {
   }, [nextSlide, prevSlide])
 
   const CurrentSlideComponent = slides[currentSlide].component
+  const currentTime = slides[currentSlide].time
+  const currentLabel = slides[currentSlide].label
 
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-background">
@@ -56,6 +58,11 @@ export function Slides() {
       <div className="h-full w-full">
         <CurrentSlideComponent />
       </div>
+      
+      {/* Time Badge - shown on all slides except title */}
+      {slides[currentSlide].id !== "title" && (
+        <TimeBadge time={currentTime} label={currentLabel} />
+      )}
 
       {/* Navigation */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4">
@@ -110,6 +117,17 @@ function WifiBadge() {
   )
 }
 
+function TimeBadge({ time, label }: { time: string; label: string }) {
+  return (
+    <div className="absolute top-6 left-6 flex items-center gap-3 px-4 py-2 rounded-full bg-card border border-border text-sm">
+      <Clock className="h-4 w-4 text-primary" />
+      <span className="text-foreground font-medium">{time}</span>
+      <span className="text-muted-foreground">|</span>
+      <span className="text-muted-foreground">{label}</span>
+    </div>
+  )
+}
+
 function TitleSlide() {
   return (
     <div className="h-full flex flex-col px-12 py-10 relative">
@@ -152,9 +170,10 @@ function TitleSlide() {
 
 function AgendaSlide() {
   const agendaItems = [
-    { time: "5:30 - 6:30 PM", title: "Check-in & Networking", description: "Food, drinks & intros", icon: Users },
-    { time: "6:30 - 7:30 PM", title: "Hands-on Building", description: "Build with v0", icon: Laptop },
-    { time: "7:30 - 8:30 PM", title: "Demos & Wrap-up", description: "Show what you built", icon: Rocket },
+    { time: "5:30 - 6:00 PM", title: "Check-in & Networking", description: "Food, drinks & intros", icon: Users },
+    { time: "6:15 - 6:45 PM", title: "Filip Hasson (Vercel)", description: "Talk + Q&A", icon: Mic },
+    { time: "6:45 - 7:45 PM", title: "Hands-on Building", description: "Build with v0", icon: Laptop },
+    { time: "7:45 - 8:30 PM", title: "Demos & Wrap-up", description: "Show what you built", icon: Rocket },
   ]
 
   return (
