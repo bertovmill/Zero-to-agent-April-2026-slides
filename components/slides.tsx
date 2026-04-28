@@ -523,15 +523,15 @@ function VercelLogo({ large }: { large?: boolean }) {
 }
 
 function RootlyLogo({ large }: { large?: boolean }) {
-  const height = large ? 48 : 32
-  const width = large ? 200 : 130
+  const height = large ? 56 : 40
+  const width = large ? 240 : 160
   return (
     <Image 
       src="/logos/rootly-white.svg" 
       alt="Rootly AI" 
       width={width} 
       height={height}
-      className={large ? "h-12 w-auto" : "h-8 w-auto"}
+      className={large ? "h-14 w-auto" : "h-10 w-auto"}
     />
   )
 }
@@ -541,9 +541,9 @@ function MakersLoungeLogo({ large }: { large?: boolean }) {
     <Image 
       src="/logos/makerslounge-wordmark-white.svg" 
       alt="MakersLounge" 
-      width={large ? 200 : 130} 
-      height={large ? 48 : 32}
-      className={large ? "h-12 w-auto" : "h-8 w-auto"}
+      width={large ? 240 : 160} 
+      height={large ? 56 : 40}
+      className={large ? "h-14 w-auto" : "h-10 w-auto"}
     />
   )
 }
