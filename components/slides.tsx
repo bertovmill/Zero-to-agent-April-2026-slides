@@ -10,6 +10,7 @@ const WIFI_NETWORK = "Rootly Guest"
 const WIFI_PASSWORD = "rootlyguest"
 
 const slides = [
+  { id: "rootly-connect", component: RootlyConnectSlide, time: "5:30 PM", label: "Check-in" },
   { id: "title", component: TitleSlide, time: "5:30 PM", label: "Check-in" },
   { id: "agenda", component: AgendaSlide, time: "5:30 PM", label: "Check-in" },
   { id: "mc-intro", component: MCIntroSlide, time: "6:00 PM", label: "Intros" },
@@ -61,8 +62,8 @@ export function Slides() {
         <CurrentSlideComponent />
       </div>
       
-      {/* Timeline - shown on all slides except title */}
-      {slides[currentSlide].id !== "title" && (
+      {/* Timeline - shown on all slides except title and rootly-connect */}
+      {slides[currentSlide].id !== "title" && slides[currentSlide].id !== "rootly-connect" && (
         <Timeline currentLabel={currentLabel} />
       )}
 
@@ -184,9 +185,23 @@ function Timeline({ currentLabel }: { currentLabel: string }) {
   )
 }
 
+function RootlyConnectSlide() {
+  return (
+    <div className="h-full w-full relative">
+      <Image 
+        src="/images/rootly-connect-with.png" 
+        alt="Rootly AI - Connect With Us" 
+        fill
+        className="object-cover"
+        priority
+      />
+    </div>
+  )
+}
+
 function TitleSlide() {
   return (
-    <div className="h-full flex flex-col px-12 py-10 relative">
+  <div className="h-full flex flex-col px-12 py-10 relative">
       {/* Top header bar */}
       <div className="flex items-center gap-4">
         <VercelTriangle className="h-4 w-4" />
