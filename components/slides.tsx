@@ -415,25 +415,25 @@ function V0Part1Slide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      {/* Hakan info - top left */}
-      <div className="absolute bottom-8 left-8 flex items-center gap-4">
-        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary">
+      {/* Hakan info - bottom left */}
+      <div className="absolute bottom-10 left-10 flex items-center gap-6">
+        <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary">
           <Image 
             src="/images/hakan-headshot.jpeg" 
             alt="Hakan" 
-            width={64} 
-            height={64}
+            width={96} 
+            height={96}
             className="w-full h-full object-cover"
           />
         </div>
         <div className="text-left">
-          <p className="font-semibold">Hakan</p>
-          <p className="text-sm text-muted-foreground">Rootly AI</p>
+          <p className="text-xl font-semibold">Hakan</p>
+          <p className="text-muted-foreground">Rootly AI</p>
         </div>
-        <div className="p-2 bg-white rounded-lg ml-2">
+        <div className="p-3 bg-white rounded-xl ml-2">
           <QRCodeSVG 
             value="https://www.linkedin.com/in/hakanorunlu/"
-            size={48}
+            size={72}
             level="M"
             includeMargin={false}
           />
