@@ -16,8 +16,9 @@ const slides = [
   { id: "makerslounge", component: MakersLoungeSlide, time: "6:00 PM", label: "Intros" },
   { id: "rootly", component: RootlySlide, time: "6:00 PM", label: "Intros" },
   { id: "philip", component: PhilipSlide, time: "6:15 PM", label: "Talk + Q&A" },
-  { id: "v0-part-1", component: V0Part1Slide, time: "6:45 PM", label: "v0 Demo" },
-  { id: "v0-part-2", component: V0Part2Slide, time: "6:45 PM", label: "v0 Demo" },
+  { id: "track-1", component: Track1Slide, time: "6:45 PM", label: "Tracks" },
+  { id: "track-2", component: Track2Slide, time: "6:45 PM", label: "Tracks" },
+  { id: "track-3", component: Track3Slide, time: "6:45 PM", label: "Tracks" },
   { id: "lets-build", component: LetsBuildSlide, time: "6:45 PM", label: "Build Time" },
   { id: "share", component: ShareSlide, time: "6:45 PM", label: "Build Time" },
   { id: "demo-time", component: DemoTimeSlide, time: "7:45 PM", label: "Demos" },
@@ -404,93 +405,122 @@ function PhilipSlide() {
   )
 }
 
-function V0Part1Slide() {
-  const features = [
-    { icon: Github, title: "Import from GitHub", description: "Bring existing repos into v0" },
-    { icon: Import, title: "Create from Figma", description: "Turn designs into code" },
-    { icon: Type, title: "Generate Text", description: "AI-powered copy writing" },
-    { icon: ImageIcon, title: "Generate Images", description: "Create visuals on the fly" },
+function Track1Slide() {
+  const steps = [
+    "Scaffold: npx create-next-app@latest",
+    "Add WDK: npx workflow@latest",
+    "Use \"use workflow\" and \"use step\" directives",
+    "Deploy to Vercel - auto-provisions everything",
   ]
 
   return (
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      {/* Hakan info - bottom left */}
-      <div className="absolute bottom-10 left-10 flex items-center gap-6">
-        <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary">
-          <Image 
-            src="/images/hakan-headshot.jpeg" 
-            alt="Hakan" 
-            width={96} 
-            height={96}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="text-left">
-          <p className="text-xl font-semibold">Hakan</p>
-          <p className="text-muted-foreground">Rootly AI</p>
-        </div>
-        <div className="p-3 bg-white rounded-xl ml-2">
-          <QRCodeSVG 
-            value="https://www.linkedin.com/in/hakanorunlu/"
-            size={72}
-            level="M"
-            includeMargin={false}
-          />
-        </div>
+      <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-6">
+        Track 1
       </div>
       
-      <div className="mb-4">
-        <VercelLogo large />
-      </div>
-      <p className="text-xl text-muted-foreground mb-8">v0 Quick Start - Part 1</p>
+      <h2 className="text-4xl md:text-6xl font-bold mb-4">Vercel Workflow (WDK)</h2>
       
-      <div className="grid grid-cols-2 gap-6 max-w-2xl w-full">
-        {features.map((feature) => (
-          <div key={feature.title} className="p-6 rounded-2xl bg-card border border-border text-left">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-              <feature.icon className="h-6 w-6 text-primary" />
+      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+        Build long-running, durable async agents that survive crashes and resume after deploys
+      </p>
+
+      <div className="flex flex-col gap-3 text-left max-w-xl w-full mb-8">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
+            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span className="text-primary font-bold text-sm">{i + 1}</span>
             </div>
-            <h3 className="font-semibold mb-1">{feature.title}</h3>
-            <p className="text-sm text-muted-foreground">{feature.description}</p>
+            <p className="text-sm">{step}</p>
           </div>
         ))}
       </div>
+
+      <p className="text-sm text-muted-foreground">
+        Docs: <span className="text-primary">useworkflow.dev</span>
+      </p>
     </div>
   )
 }
 
-function V0Part2Slide() {
-  const features = [
-    { icon: Palette, title: "Design System", description: "Consistent theming & styles" },
-    { icon: FolderTree, title: "Folder Structure", description: "Organized project layout" },
-    { icon: FileText, title: "Instructions/Rules", description: "Custom AI behavior" },
-    { icon: Plug, title: "MCP Integrations", description: "Connect external tools" },
-    { icon: ShieldCheck, title: "Ask Permission", description: "Control what v0 can do" },
+function Track2Slide() {
+  const steps = [
+    "Open v0.app and describe your app",
+    "Iterate on UI with natural language",
+    "Connect an MCP server for external data",
+    "Deploy to Vercel with one click",
   ]
 
   return (
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <div className="mb-4">
-        <VercelLogo large />
+      <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-6">
+        Track 2
       </div>
-      <p className="text-xl text-muted-foreground mb-8">v0 Quick Start - Part 2</p>
-      <p className="text-sm text-primary mb-8">Presented by Berto</p>
       
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl w-full">
-        {features.map((feature) => (
-          <div key={feature.title} className="p-5 rounded-2xl bg-card border border-border text-left">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
-              <feature.icon className="h-5 w-5 text-primary" />
+      <h2 className="text-4xl md:text-6xl font-bold mb-4">v0 + MCPs</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+        Use v0 to rapidly build an AI app that connects to MCP servers for external tools and data
+      </p>
+
+      <div className="flex flex-col gap-3 text-left max-w-xl w-full mb-8">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
+            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span className="text-primary font-bold text-sm">{i + 1}</span>
             </div>
-            <h3 className="font-semibold mb-1 text-sm">{feature.title}</h3>
-            <p className="text-xs text-muted-foreground">{feature.description}</p>
+            <p className="text-sm">{step}</p>
           </div>
         ))}
       </div>
+
+      <p className="text-sm text-muted-foreground">
+        Start at: <span className="text-primary">v0.app</span>
+      </p>
+    </div>
+  )
+}
+
+function Track3Slide() {
+  const steps = [
+    "Install: npm install chat @chat-adapter/slack",
+    "Create Chat instance with adapters",
+    "Wire handlers: onNewMention, onReaction",
+    "Add AI SDK for LLM reasoning",
+  ]
+
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-6">
+        Track 3
+      </div>
+      
+      <h2 className="text-4xl md:text-6xl font-bold mb-4">ChatSDK Agents</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+        Build agents with AI SDK + ChatSDK that work across Slack, Discord, Teams, GitHub, and more
+      </p>
+
+      <div className="flex flex-col gap-3 text-left max-w-xl w-full mb-8">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
+            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span className="text-primary font-bold text-sm">{i + 1}</span>
+            </div>
+            <p className="text-sm">{step}</p>
+          </div>
+        ))}
+      </div>
+
+      <p className="text-sm text-muted-foreground">
+        Write once, deploy everywhere
+      </p>
     </div>
   )
 }
