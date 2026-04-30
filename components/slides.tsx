@@ -19,6 +19,7 @@ const slides = [
   { id: "v0-part-1", component: V0Part1Slide, time: "6:45 PM", label: "v0 Demo" },
   { id: "v0-part-2", component: V0Part2Slide, time: "6:45 PM", label: "v0 Demo" },
   { id: "lets-build", component: LetsBuildSlide, time: "6:45 PM", label: "Build Time" },
+  { id: "share", component: ShareSlide, time: "6:45 PM", label: "Build Time" },
   { id: "demo-time", component: DemoTimeSlide, time: "7:45 PM", label: "Demos" },
   { id: "thank-you", component: ThankYouSlide, time: "8:30 PM", label: "Wrap-up" },
 ]
@@ -542,6 +543,33 @@ function LetsBuildSlide() {
       <p className="mt-6 text-sm text-muted-foreground">
         Berto is available to help first-timers!
       </p>
+    </div>
+  )
+}
+
+function ShareSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <h2 className="text-5xl md:text-7xl font-bold mb-6">Share Your Build!</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-xl mb-12">
+        Post publicly across socials while you build
+      </p>
+
+      <div className="px-8 py-6 rounded-2xl bg-card border border-border mb-10">
+        <p className="text-4xl md:text-5xl font-bold text-primary">#ZerotoAgent</p>
+      </div>
+
+      <div className="flex flex-col gap-4 max-w-md w-full">
+        <div className="p-5 rounded-xl bg-card border border-border">
+          <p className="text-lg">Share on <span className="text-primary font-medium">X, LinkedIn, Instagram</span></p>
+        </div>
+        <div className="p-5 rounded-xl bg-card border border-border">
+          <p className="text-lg">Global submissions due <span className="text-primary font-medium">May 3</span></p>
+        </div>
+      </div>
     </div>
   )
 }
