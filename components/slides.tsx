@@ -17,6 +17,7 @@ const slides = [
   { id: "makerslounge", component: MakersLoungeSlide, time: "6:00 PM", label: "Intros" },
   { id: "rootly", component: RootlySlide, time: "6:00 PM", label: "Intros" },
   { id: "philip", component: PhilipSlide, time: "6:15 PM", label: "Talk + Q&A" },
+  { id: "video", component: VideoSlide, time: "6:15 PM", label: "Talk + Q&A" },
   { id: "track-1", component: Track1Slide, time: "6:45 PM", label: "Tracks" },
   { id: "track-2", component: Track2Slide, time: "6:45 PM", label: "Tracks" },
   { id: "track-3", component: Track3Slide, time: "6:45 PM", label: "Tracks" },
@@ -421,6 +422,23 @@ function PhilipSlide() {
   )
 }
 
+function VideoSlide() {
+  return (
+    <div className="h-full w-full flex items-center justify-center bg-black relative">
+      <WifiBadge />
+      <div className="w-full h-full max-w-[90%] max-h-[85%] aspect-video">
+        <iframe
+          src="https://www.youtube.com/embed/r9hB_CQQIMk?autoplay=0&rel=0"
+          title="Zero to Agent Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="w-full h-full rounded-xl"
+        />
+      </div>
+    </div>
+  )
+}
+  
 function Track1Slide() {
   const steps = [
     "Scaffold: npx create-next-app@latest",
