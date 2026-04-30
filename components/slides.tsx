@@ -17,7 +17,7 @@ const slides = [
   { id: "makerslounge", component: MakersLoungeSlide, time: "6:00 PM", label: "Intros" },
   { id: "rootly", component: RootlySlide, time: "6:00 PM", label: "Intros" },
   { id: "video", component: VideoSlide, time: "6:15 PM", label: "Talk + Q&A" },
-  { id: "philip", component: PhilipSlide, time: "6:15 PM", label: "Talk + Q&A" },
+  { id: "filip", component: FilipSlide, time: "6:15 PM", label: "Talk + Q&A" },
   { id: "track-1", component: Track1Slide, time: "6:45 PM", label: "Tracks" },
   { id: "track-2", component: Track2Slide, time: "6:45 PM", label: "Tracks" },
   { id: "track-3", component: Track3Slide, time: "6:45 PM", label: "Tracks" },
@@ -385,7 +385,7 @@ function RootlySlide() {
   )
 }
 
-function PhilipSlide() {
+function FilipSlide() {
   return (
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
@@ -393,14 +393,14 @@ function PhilipSlide() {
       <div className="w-44 h-44 rounded-full border-2 border-primary mb-8 overflow-hidden">
         <Image 
           src="/images/philip-headshot.jpeg" 
-          alt="Philip" 
+          alt="Filip" 
           width={176} 
           height={176}
           className="w-full h-full object-cover"
         />
       </div>
       
-      <h2 className="text-5xl md:text-6xl font-bold mb-2">Philip</h2>
+      <h2 className="text-5xl md:text-6xl font-bold mb-2">Filip</h2>
       <p className="text-2xl text-primary mb-10">Vercel</p>
 
       <div className="flex flex-col gap-4 max-w-xl text-left">
