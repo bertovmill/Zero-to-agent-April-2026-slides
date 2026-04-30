@@ -706,15 +706,15 @@ function SubmissionSlide() {
 
       <div className="p-6 bg-white rounded-2xl mb-6">
         <QRCodeSVG 
-          value="https://puzzled-hibiscus-bda.notion.site/352ea76f959d802eb228ceb8933d7c20"
+          value="https://community.vercel.com/hackathons/zero-to-agent"
           size={220}
           level="H"
           includeMargin={false}
         />
       </div>
 
-      <p className="text-sm text-muted-foreground mb-8 max-w-md break-all">
-        puzzled-hibiscus-bda.notion.site/352ea76f959d802eb228ceb8933d7c20
+      <p className="text-sm text-muted-foreground mb-8">
+        community.vercel.com/hackathons/zero-to-agent
       </p>
 
       <div className="p-5 rounded-xl bg-card border border-border">
