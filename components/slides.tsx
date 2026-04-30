@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { ChevronLeft, ChevronRight, Clock, MapPin, Calendar, Users, Zap, BookOpen, Heart, Sparkles, Laptop, Rocket, Wifi, Github, Import, Type, ImageIcon, Palette, FolderTree, FileText, Plug, ShieldCheck, Mic } from "lucide-react"
+import { ChevronLeft, ChevronRight, Clock, MapPin, Calendar, Users, Zap, BookOpen, Heart, Sparkles, Laptop, Rocket, Wifi, Github, Import, Type, ImageIcon, Palette, FolderTree, FileText, Plug, ShieldCheck, Mic, Camera } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { QRCodeSVG } from "qrcode.react"
 import Image from "next/image"
@@ -16,6 +16,7 @@ const slides = [
   { id: "mc-intro", component: MCIntroSlide, time: "6:00 PM", label: "Intros" },
   { id: "makerslounge", component: MakersLoungeSlide, time: "6:00 PM", label: "Intros" },
   { id: "rootly", component: RootlySlide, time: "6:00 PM", label: "Intros" },
+  { id: "group-photo", component: GroupPhotoSlide, time: "6:00 PM", label: "Intros" },
   { id: "video", component: VideoSlide, time: "6:15 PM", label: "Talk + Q&A" },
   { id: "filip", component: FilipSlide, time: "6:15 PM", label: "Talk + Q&A" },
   { id: "track-1", component: Track1Slide, time: "6:45 PM", label: "Tracks" },
@@ -421,6 +422,37 @@ function FilipSlide() {
   )
 }
 
+function GroupPhotoSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center mb-10">
+        <Camera className="h-16 w-16 text-primary" />
+      </div>
+      
+      <h2 className="text-6xl md:text-8xl font-bold mb-6">Group Photo!</h2>
+      
+      <p className="text-2xl text-muted-foreground max-w-2xl mb-12">
+        Everyone gather together for a group photo
+      </p>
+
+      <div className="px-10 py-8 rounded-2xl bg-card border border-border mb-10">
+        <p className="text-4xl md:text-5xl font-bold text-primary">#ZerotoAgent</p>
+      </div>
+
+      <div className="flex flex-col gap-4 max-w-xl w-full">
+        <div className="p-6 rounded-xl bg-card border border-border">
+          <p className="text-xl">Post on <span className="text-primary font-medium">X, LinkedIn, Instagram</span></p>
+        </div>
+        <div className="p-6 rounded-xl bg-card border border-border">
+          <p className="text-xl">Share in <span className="text-primary font-medium">Slack</span>!</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+  
 function VideoSlide() {
   return (
     <div className="h-full w-full flex items-center justify-center bg-black relative">
