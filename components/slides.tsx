@@ -10,17 +10,22 @@ const WIFI_NETWORK = "Rootly Guest"
 const WIFI_PASSWORD = "rootlyguest"
 
 const slides = [
+  { id: "rootly-connect", component: RootlyConnectSlide, time: "5:30 PM", label: "Check-in" },
   { id: "title", component: TitleSlide, time: "5:30 PM", label: "Check-in" },
   { id: "agenda", component: AgendaSlide, time: "5:30 PM", label: "Check-in" },
   { id: "mc-intro", component: MCIntroSlide, time: "6:00 PM", label: "Intros" },
   { id: "makerslounge", component: MakersLoungeSlide, time: "6:00 PM", label: "Intros" },
   { id: "rootly", component: RootlySlide, time: "6:00 PM", label: "Intros" },
   { id: "philip", component: PhilipSlide, time: "6:15 PM", label: "Talk + Q&A" },
-  { id: "v0-part-1", component: V0Part1Slide, time: "6:45 PM", label: "v0 Demo" },
-  { id: "v0-part-2", component: V0Part2Slide, time: "6:45 PM", label: "v0 Demo" },
+  { id: "video", component: VideoSlide, time: "6:15 PM", label: "Talk + Q&A" },
+  { id: "track-1", component: Track1Slide, time: "6:45 PM", label: "Tracks" },
+  { id: "track-2", component: Track2Slide, time: "6:45 PM", label: "Tracks" },
+  { id: "track-3", component: Track3Slide, time: "6:45 PM", label: "Tracks" },
   { id: "lets-build", component: LetsBuildSlide, time: "6:45 PM", label: "Build Time" },
+  { id: "share", component: ShareSlide, time: "6:45 PM", label: "Build Time" },
   { id: "demo-time", component: DemoTimeSlide, time: "7:45 PM", label: "Demos" },
   { id: "thank-you", component: ThankYouSlide, time: "8:30 PM", label: "Wrap-up" },
+  { id: "submission", component: SubmissionSlide, time: "8:30 PM", label: "Wrap-up" },
 ]
 
 export function Slides() {
@@ -59,8 +64,8 @@ export function Slides() {
         <CurrentSlideComponent />
       </div>
       
-      {/* Timeline - shown on all slides except title */}
-      {slides[currentSlide].id !== "title" && (
+      {/* Timeline - shown on all slides except title and rootly-connect */}
+      {slides[currentSlide].id !== "title" && slides[currentSlide].id !== "rootly-connect" && (
         <Timeline currentLabel={currentLabel} />
       )}
 
@@ -182,9 +187,23 @@ function Timeline({ currentLabel }: { currentLabel: string }) {
   )
 }
 
+function RootlyConnectSlide() {
+  return (
+    <div className="h-full w-full relative">
+      <Image 
+        src="/images/rootly-connect-with.png" 
+        alt="Rootly AI - Connect With Us" 
+        fill
+        className="object-cover"
+        priority
+      />
+    </div>
+  )
+}
+
 function TitleSlide() {
   return (
-    <div className="h-full flex flex-col px-12 py-10 relative">
+  <div className="h-full flex flex-col px-12 py-10 relative">
       {/* Top header bar */}
       <div className="flex items-center gap-4">
         <VercelTriangle className="h-4 w-4" />
@@ -403,69 +422,139 @@ function PhilipSlide() {
   )
 }
 
-function V0Part1Slide() {
-  const features = [
-    { icon: Github, title: "Import from GitHub", description: "Bring existing repos into v0" },
-    { icon: Import, title: "Create from Figma", description: "Turn designs into code" },
-    { icon: Type, title: "Generate Text", description: "AI-powered copy writing" },
-    { icon: ImageIcon, title: "Generate Images", description: "Create visuals on the fly" },
-  ]
-
+function VideoSlide() {
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+    <div className="h-full w-full flex items-center justify-center bg-black relative">
       <WifiBadge />
-      
-      <div className="mb-4">
-        <VercelLogo large />
-      </div>
-      <p className="text-xl text-muted-foreground mb-8">v0 Quick Start - Part 1</p>
-      <p className="text-sm text-primary mb-8">Presented by Hakan</p>
-      
-      <div className="grid grid-cols-2 gap-6 max-w-2xl w-full">
-        {features.map((feature) => (
-          <div key={feature.title} className="p-6 rounded-2xl bg-card border border-border text-left">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-              <feature.icon className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="font-semibold mb-1">{feature.title}</h3>
-            <p className="text-sm text-muted-foreground">{feature.description}</p>
-          </div>
-        ))}
+      <div className="w-full h-full max-w-[90%] max-h-[85%] aspect-video">
+        <iframe
+          src="https://www.youtube.com/embed/r9hB_CQQIMk?autoplay=0&rel=0"
+          title="Zero to Agent Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="w-full h-full rounded-xl"
+        />
       </div>
     </div>
   )
 }
-
-function V0Part2Slide() {
-  const features = [
-    { icon: Palette, title: "Design System", description: "Consistent theming & styles" },
-    { icon: FolderTree, title: "Folder Structure", description: "Organized project layout" },
-    { icon: FileText, title: "Instructions/Rules", description: "Custom AI behavior" },
-    { icon: Plug, title: "MCP Integrations", description: "Connect external tools" },
-    { icon: ShieldCheck, title: "Ask Permission", description: "Control what v0 can do" },
+  
+function Track1Slide() {
+  const steps = [
+    "Scaffold: npx create-next-app@latest",
+    "Add WDK: npx workflow@latest",
+    "Use \"use workflow\" and \"use step\" directives",
+    "Deploy to Vercel - auto-provisions everything",
   ]
 
   return (
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <div className="mb-4">
-        <VercelLogo large />
+      <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-6">
+        Track 1
       </div>
-      <p className="text-xl text-muted-foreground mb-8">v0 Quick Start - Part 2</p>
-      <p className="text-sm text-primary mb-8">Presented by Berto</p>
       
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl w-full">
-        {features.map((feature) => (
-          <div key={feature.title} className="p-5 rounded-2xl bg-card border border-border text-left">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
-              <feature.icon className="h-5 w-5 text-primary" />
+      <h2 className="text-4xl md:text-6xl font-bold mb-4">Vercel Workflow (WDK)</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+        Build long-running, durable async agents that survive crashes and resume after deploys
+      </p>
+
+      <div className="flex flex-col gap-3 text-left max-w-xl w-full mb-8">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
+            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span className="text-primary font-bold text-sm">{i + 1}</span>
             </div>
-            <h3 className="font-semibold mb-1 text-sm">{feature.title}</h3>
-            <p className="text-xs text-muted-foreground">{feature.description}</p>
+            <p className="text-sm">{step}</p>
           </div>
         ))}
       </div>
+
+      <p className="text-sm text-muted-foreground">
+        Docs: <span className="text-primary">useworkflow.dev</span>
+      </p>
+    </div>
+  )
+}
+
+function Track2Slide() {
+  const steps = [
+    "Open v0.app and describe your app",
+    "Iterate on UI with natural language",
+    "Connect an MCP server for external data",
+    "Deploy to Vercel with one click",
+  ]
+
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-6">
+        Track 2
+      </div>
+      
+      <h2 className="text-4xl md:text-6xl font-bold mb-4">v0 + MCPs</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+        Use v0 to rapidly build an AI app that connects to MCP servers for external tools and data
+      </p>
+
+      <div className="flex flex-col gap-3 text-left max-w-xl w-full mb-8">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
+            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span className="text-primary font-bold text-sm">{i + 1}</span>
+            </div>
+            <p className="text-sm">{step}</p>
+          </div>
+        ))}
+      </div>
+
+      <p className="text-sm text-muted-foreground">
+        Start at: <span className="text-primary">v0.app</span>
+      </p>
+    </div>
+  )
+}
+
+function Track3Slide() {
+  const steps = [
+    "Install: npm install chat @chat-adapter/slack",
+    "Create Chat instance with adapters",
+    "Wire handlers: onNewMention, onReaction",
+    "Add AI SDK for LLM reasoning",
+  ]
+
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-6">
+        Track 3
+      </div>
+      
+      <h2 className="text-4xl md:text-6xl font-bold mb-4">ChatSDK Agents</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+        Build agents with AI SDK + ChatSDK that work across Slack, Discord, Teams, GitHub, and more
+      </p>
+
+      <div className="flex flex-col gap-3 text-left max-w-xl w-full mb-8">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
+            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span className="text-primary font-bold text-sm">{i + 1}</span>
+            </div>
+            <p className="text-sm">{step}</p>
+          </div>
+        ))}
+      </div>
+
+      <p className="text-sm text-muted-foreground">
+        Write once, deploy everywhere
+      </p>
     </div>
   )
 }
@@ -499,25 +588,52 @@ function LetsBuildSlide() {
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <span className="text-primary font-bold">1</span>
           </div>
-          <p>Open <span className="text-primary font-medium">v0.dev</span> and start building</p>
+          <p>Grab your <span className="text-primary font-medium">$30 credits</span> code</p>
         </div>
         <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <span className="text-primary font-bold">2</span>
           </div>
-          <p>Build your AI agent idea</p>
+          <p>Redeem in <span className="text-primary font-medium">v0.dev</span> &rarr; Credits &rarr; Redeem usage code</p>
         </div>
         <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <span className="text-primary font-bold">3</span>
           </div>
-          <p>Submit 15 min before demos!</p>
+          <p>Submit your project <span className="text-primary font-medium">15 min before demos</span></p>
         </div>
       </div>
 
       <p className="mt-6 text-sm text-muted-foreground">
         Berto is available to help first-timers!
       </p>
+    </div>
+  )
+}
+
+function ShareSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <h2 className="text-5xl md:text-7xl font-bold mb-6">Share Your Build!</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-xl mb-12">
+        Post publicly across socials while you build
+      </p>
+
+      <div className="px-8 py-6 rounded-2xl bg-card border border-border mb-10">
+        <p className="text-4xl md:text-5xl font-bold text-primary">#ZerotoAgent</p>
+      </div>
+
+      <div className="flex flex-col gap-4 max-w-md w-full">
+        <div className="p-5 rounded-xl bg-card border border-border">
+          <p className="text-lg">Share on <span className="text-primary font-medium">X, LinkedIn, Instagram</span></p>
+        </div>
+        <div className="p-5 rounded-xl bg-card border border-border">
+          <p className="text-lg">Global submissions due <span className="text-primary font-medium">May 3</span></p>
+        </div>
+      </div>
     </div>
   )
 }
@@ -578,10 +694,41 @@ function ThankYouSlide() {
   )
 }
 
+function SubmissionSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <h2 className="text-5xl md:text-7xl font-bold mb-4">Submit Your Project</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-xl mb-10">
+        Scan to submit for the global competition
+      </p>
+
+      <div className="p-6 bg-white rounded-2xl mb-6">
+        <QRCodeSVG 
+          value="https://puzzled-hibiscus-bda.notion.site/352ea76f959d802eb228ceb8933d7c20"
+          size={220}
+          level="H"
+          includeMargin={false}
+        />
+      </div>
+
+      <p className="text-sm text-muted-foreground mb-8 max-w-md break-all">
+        puzzled-hibiscus-bda.notion.site/352ea76f959d802eb228ceb8933d7c20
+      </p>
+
+      <div className="p-5 rounded-xl bg-card border border-border">
+        <p className="text-lg">Submissions due <span className="text-primary font-bold">May 3</span></p>
+      </div>
+    </div>
+  )
+}
+
 // Logo Components
 function VercelTriangle({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 76 65" fill="currentColor">
+  <svg className={className} viewBox="0 0 76 65" fill="currentColor">
       <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
     </svg>
   )
