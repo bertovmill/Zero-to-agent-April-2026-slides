@@ -16,8 +16,8 @@ const slides = [
   { id: "mc-intro", component: MCIntroSlide, time: "6:00 PM", label: "Intros" },
   { id: "makerslounge", component: MakersLoungeSlide, time: "6:00 PM", label: "Intros" },
   { id: "rootly", component: RootlySlide, time: "6:00 PM", label: "Intros" },
-  { id: "philip", component: PhilipSlide, time: "6:15 PM", label: "Talk + Q&A" },
   { id: "video", component: VideoSlide, time: "6:15 PM", label: "Talk + Q&A" },
+  { id: "philip", component: PhilipSlide, time: "6:15 PM", label: "Talk + Q&A" },
   { id: "track-1", component: Track1Slide, time: "6:45 PM", label: "Tracks" },
   { id: "track-2", component: Track2Slide, time: "6:45 PM", label: "Tracks" },
   { id: "track-3", component: Track3Slide, time: "6:45 PM", label: "Tracks" },
@@ -401,8 +401,7 @@ function PhilipSlide() {
       </div>
       
       <h2 className="text-5xl md:text-6xl font-bold mb-2">Philip</h2>
-      <p className="text-2xl text-primary mb-2">Vercel</p>
-      <p className="text-xl text-muted-foreground mb-10">Flying in from Brazil for tonight!</p>
+      <p className="text-2xl text-primary mb-10">Vercel</p>
 
       <div className="flex flex-col gap-4 max-w-xl text-left">
         <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
