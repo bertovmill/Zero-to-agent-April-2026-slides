@@ -415,11 +415,35 @@ function V0Part1Slide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
+      {/* Hakan info - top left */}
+      <div className="absolute bottom-8 left-8 flex items-center gap-4">
+        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary">
+          <Image 
+            src="/images/hakan-headshot.jpeg" 
+            alt="Hakan" 
+            width={64} 
+            height={64}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="text-left">
+          <p className="font-semibold">Hakan</p>
+          <p className="text-sm text-muted-foreground">Rootly AI</p>
+        </div>
+        <div className="p-2 bg-white rounded-lg ml-2">
+          <QRCodeSVG 
+            value="https://www.linkedin.com/in/hakanorunlu/"
+            size={48}
+            level="M"
+            includeMargin={false}
+          />
+        </div>
+      </div>
+      
       <div className="mb-4">
         <VercelLogo large />
       </div>
       <p className="text-xl text-muted-foreground mb-8">v0 Quick Start - Part 1</p>
-      <p className="text-sm text-primary mb-8">Presented by Hakan</p>
       
       <div className="grid grid-cols-2 gap-6 max-w-2xl w-full">
         {features.map((feature) => (
