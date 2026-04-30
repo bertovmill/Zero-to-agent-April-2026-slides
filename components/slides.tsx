@@ -115,8 +115,8 @@ export function Slides() {
 
 function WifiBadge() {
   return (
-    <div className="absolute top-6 right-6 flex items-center gap-3 px-4 py-2 rounded-full bg-card border border-border text-sm">
-      <Wifi className="h-4 w-4 text-primary" />
+    <div className="absolute top-6 right-6 flex items-center gap-3 px-5 py-3 rounded-full bg-card border border-border text-base">
+      <Wifi className="h-5 w-5 text-primary" />
       <span className="text-foreground font-medium">{WIFI_NETWORK}</span>
       <span className="text-muted-foreground">|</span>
       <span className="text-muted-foreground">{WIFI_PASSWORD}</span>
@@ -168,8 +168,8 @@ function Timeline({ currentLabel }: { currentLabel: string }) {
                       ? "text-muted-foreground" 
                       : "text-muted-foreground/50"
                 }`}>
-                  <span className={`text-xs font-medium ${isActive ? "" : ""}`}>{checkpoint.time}</span>
-                  <span className={`text-xs ${isActive ? "font-medium" : "hidden md:inline"}`}>{checkpoint.label}</span>
+                  <span className={`text-sm font-medium ${isActive ? "" : ""}`}>{checkpoint.time}</span>
+                  <span className={`text-sm ${isActive ? "font-medium" : "hidden md:inline"}`}>{checkpoint.label}</span>
                 </div>
               </div>
               
@@ -206,8 +206,8 @@ function TitleSlide() {
   <div className="h-full flex flex-col px-12 py-10 relative">
       {/* Top header bar */}
       <div className="flex items-center gap-4">
-        <VercelTriangle className="h-4 w-4" />
-        <span className="text-muted-foreground font-mono text-sm tracking-wider">02A/GLOBAL BUILD WEEK</span>
+        <VercelTriangle className="h-5 w-5" />
+        <span className="text-muted-foreground font-mono text-base tracking-wider">02A/GLOBAL BUILD WEEK</span>
       </div>
 
       {/* Center content */}
@@ -224,10 +224,10 @@ function TitleSlide() {
       {/* Bottom info bar */}
       <div className="flex justify-between items-end">
         <div className="font-mono text-muted-foreground tracking-wider">
-          <p className="text-lg">05.01.26</p>
+          <p className="text-xl">05.01.26</p>
         </div>
         <div className="font-mono text-muted-foreground tracking-wider text-right">
-          <p className="text-lg">TORONTO/CAN</p>
+          <p className="text-xl">TORONTO/CAN</p>
         </div>
       </div>
 
@@ -253,21 +253,21 @@ function AgendaSlide() {
     <div className="h-full flex flex-col items-center justify-center px-8 relative">
       <WifiBadge />
       
-      <h2 className="text-4xl md:text-5xl font-bold mb-12">Tonight&apos;s Agenda</h2>
+      <h2 className="text-5xl md:text-6xl font-bold mb-12">Tonight&apos;s Agenda</h2>
       
-      <div className="w-full max-w-2xl space-y-6">
+      <div className="w-full max-w-3xl space-y-6">
         {agendaItems.map((item, index) => (
           <div
             key={index}
             className="flex items-center gap-6 p-6 rounded-2xl bg-card border border-border"
           >
-            <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-              <item.icon className="h-7 w-7 text-primary" />
+            <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center">
+              <item.icon className="h-8 w-8 text-primary" />
             </div>
             <div className="flex-1">
-              <p className="text-sm text-primary font-medium mb-1">{item.time}</p>
-              <h3 className="text-xl font-semibold">{item.title}</h3>
-              <p className="text-muted-foreground">{item.description}</p>
+              <p className="text-base text-primary font-medium mb-1">{item.time}</p>
+              <h3 className="text-2xl font-semibold">{item.title}</h3>
+              <p className="text-lg text-muted-foreground">{item.description}</p>
             </div>
           </div>
         ))}
@@ -291,21 +291,21 @@ function MCIntroSlide() {
         />
       </div>
       
-      <h2 className="text-5xl md:text-6xl font-bold mb-2">Berto</h2>
-      <p className="text-2xl text-muted-foreground mb-10">Your MC for Tonight</p>
+      <h2 className="text-6xl md:text-7xl font-bold mb-2">Berto</h2>
+      <p className="text-3xl text-muted-foreground mb-10">Your MC for Tonight</p>
 
-      <div className="flex flex-col gap-4 max-w-xl text-left">
-        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
-          <p className="text-lg">Co-founder of MakersLounge - building community for Toronto builders</p>
+      <div className="flex flex-col gap-4 max-w-2xl text-left">
+        <div className="flex items-start gap-4 p-6 rounded-xl bg-card border border-border">
+          <div className="w-3 h-3 rounded-full bg-primary mt-3" />
+          <p className="text-xl">Co-founder of MakersLounge - building community for Toronto builders</p>
         </div>
-<div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
-          <p className="text-lg">Passionate about helping people go from idea to shipped product</p>
+        <div className="flex items-start gap-4 p-6 rounded-xl bg-card border border-border">
+          <div className="w-3 h-3 rounded-full bg-primary mt-3" />
+          <p className="text-xl">Passionate about helping people go from idea to shipped product</p>
         </div>
-        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
-          <p className="text-lg">These slides? Built in v0 in under 5 minutes</p>
+        <div className="flex items-start gap-4 p-6 rounded-xl bg-card border border-border">
+          <div className="w-3 h-3 rounded-full bg-primary mt-3" />
+          <p className="text-xl">These slides? Built in v0 in under 5 minutes</p>
         </div>
       </div>
     </div>
@@ -328,20 +328,20 @@ function MakersLoungeSlide() {
         <MakersLoungeLogo large />
       </div>
       
-      <h2 className="text-4xl md:text-5xl font-bold mb-2">Where <span className="text-primary">Makers</span> Build Together</h2>
+      <h2 className="text-5xl md:text-6xl font-bold mb-2">Where <span className="text-primary">Makers</span> Build Together</h2>
       
-      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+      <p className="text-2xl text-muted-foreground max-w-2xl mb-10">
         A Toronto-based community for founders, developers, and creators who are actively building something.
       </p>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl w-full">
         {values.map((value) => (
           <div key={value.title} className="p-6 rounded-2xl bg-card border border-border">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-              <value.icon className="h-6 w-6 text-primary" />
+            <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <value.icon className="h-7 w-7 text-primary" />
             </div>
-            <h3 className="font-semibold mb-1">{value.title}</h3>
-            <p className="text-sm text-muted-foreground">{value.description}</p>
+            <h3 className="text-lg font-semibold mb-1">{value.title}</h3>
+            <p className="text-base text-muted-foreground">{value.description}</p>
           </div>
         ))}
       </div>
@@ -358,28 +358,28 @@ function RootlySlide() {
         <RootlyLogo large />
       </div>
       
-      <h2 className="text-4xl md:text-5xl font-bold mb-6">AI SRE Agents</h2>
+      <h2 className="text-5xl md:text-6xl font-bold mb-6">AI SRE Agents</h2>
       
-      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+      <p className="text-2xl text-muted-foreground max-w-2xl mb-10">
         On-call and incident response platform that brings AI and modern teams together to prevent and resolve incidents faster.
       </p>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl w-full mb-10">
         {["Root Cause Analysis", "Pattern Detection", "Always-on Copilot", "Continuous Improvement"].map((feature) => (
-          <div key={feature} className="p-4 rounded-xl bg-card border border-border">
-            <p className="text-sm font-medium">{feature}</p>
+          <div key={feature} className="p-5 rounded-xl bg-card border border-border">
+            <p className="text-base font-medium">{feature}</p>
           </div>
         ))}
       </div>
 
-      <p className="text-sm text-muted-foreground mb-4">Trusted by</p>
+      <p className="text-base text-muted-foreground mb-4">Trusted by</p>
       <div className="flex flex-wrap justify-center gap-6 text-muted-foreground">
-        <span className="font-medium">LinkedIn</span>
-        <span className="font-medium">NVIDIA</span>
-        <span className="font-medium">Replit</span>
-        <span className="font-medium">Canva</span>
-        <span className="font-medium">Figma</span>
-        <span className="font-medium">Dropbox</span>
+        <span className="text-lg font-medium">LinkedIn</span>
+        <span className="text-lg font-medium">NVIDIA</span>
+        <span className="text-lg font-medium">Replit</span>
+        <span className="text-lg font-medium">Canva</span>
+        <span className="text-lg font-medium">Figma</span>
+        <span className="text-lg font-medium">Dropbox</span>
       </div>
     </div>
   )
@@ -400,21 +400,21 @@ function FilipSlide() {
         />
       </div>
       
-      <h2 className="text-5xl md:text-6xl font-bold mb-2">Filip</h2>
-      <p className="text-2xl text-primary mb-10">Vercel</p>
+      <h2 className="text-6xl md:text-7xl font-bold mb-2">Filip</h2>
+      <p className="text-3xl text-primary mb-10">Vercel</p>
 
-      <div className="flex flex-col gap-4 max-w-xl text-left">
-        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
-          <p className="text-lg">Developer Relations at Vercel</p>
+      <div className="flex flex-col gap-4 max-w-2xl text-left">
+        <div className="flex items-start gap-4 p-6 rounded-xl bg-card border border-border">
+          <div className="w-3 h-3 rounded-full bg-primary mt-3" />
+          <p className="text-xl">Developer Relations at Vercel</p>
         </div>
-        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
-          <p className="text-lg">Deep expertise in v0 and AI-powered development</p>
+        <div className="flex items-start gap-4 p-6 rounded-xl bg-card border border-border">
+          <div className="w-3 h-3 rounded-full bg-primary mt-3" />
+          <p className="text-xl">Deep expertise in v0 and AI-powered development</p>
         </div>
-        <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border">
-          <div className="w-2 h-2 rounded-full bg-primary mt-2.5" />
-          <p className="text-lg">20 min talk + Q&A</p>
+        <div className="flex items-start gap-4 p-6 rounded-xl bg-card border border-border">
+          <div className="w-3 h-3 rounded-full bg-primary mt-3" />
+          <p className="text-xl">20 min talk + Q&A</p>
         </div>
       </div>
     </div>
@@ -450,28 +450,28 @@ function Track1Slide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-6">
+      <div className="px-5 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-base mb-6">
         Track 1
       </div>
       
-      <h2 className="text-4xl md:text-6xl font-bold mb-4">Vercel Workflow (WDK)</h2>
+      <h2 className="text-5xl md:text-7xl font-bold mb-4">Vercel Workflow (WDK)</h2>
       
-      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+      <p className="text-2xl text-muted-foreground max-w-2xl mb-10">
         Build long-running, durable async agents that survive crashes and resume after deploys
       </p>
 
-      <div className="flex flex-col gap-3 text-left max-w-xl w-full mb-8">
+      <div className="flex flex-col gap-3 text-left max-w-2xl w-full mb-8">
         {steps.map((step, i) => (
-          <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span className="text-primary font-bold text-sm">{i + 1}</span>
+          <div key={i} className="flex items-center gap-4 p-5 rounded-xl bg-card border border-border">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span className="text-primary font-bold text-base">{i + 1}</span>
             </div>
-            <p className="text-sm">{step}</p>
+            <p className="text-lg">{step}</p>
           </div>
         ))}
       </div>
 
-      <p className="text-sm text-muted-foreground">
+      <p className="text-base text-muted-foreground">
         Docs: <span className="text-primary">useworkflow.dev</span>
       </p>
     </div>
@@ -490,28 +490,28 @@ function Track2Slide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-6">
+      <div className="px-5 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-base mb-6">
         Track 2
       </div>
       
-      <h2 className="text-4xl md:text-6xl font-bold mb-4">v0 + MCPs</h2>
+      <h2 className="text-5xl md:text-7xl font-bold mb-4">v0 + MCPs</h2>
       
-      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+      <p className="text-2xl text-muted-foreground max-w-2xl mb-10">
         Use v0 to rapidly build an AI app that connects to MCP servers for external tools and data
       </p>
 
-      <div className="flex flex-col gap-3 text-left max-w-xl w-full mb-8">
+      <div className="flex flex-col gap-3 text-left max-w-2xl w-full mb-8">
         {steps.map((step, i) => (
-          <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span className="text-primary font-bold text-sm">{i + 1}</span>
+          <div key={i} className="flex items-center gap-4 p-5 rounded-xl bg-card border border-border">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span className="text-primary font-bold text-base">{i + 1}</span>
             </div>
-            <p className="text-sm">{step}</p>
+            <p className="text-lg">{step}</p>
           </div>
         ))}
       </div>
 
-      <p className="text-sm text-muted-foreground">
+      <p className="text-base text-muted-foreground">
         Start at: <span className="text-primary">v0.app</span>
       </p>
     </div>
@@ -530,28 +530,28 @@ function Track3Slide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-6">
+      <div className="px-5 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-base mb-6">
         Track 3
       </div>
       
-      <h2 className="text-4xl md:text-6xl font-bold mb-4">ChatSDK Agents</h2>
+      <h2 className="text-5xl md:text-7xl font-bold mb-4">ChatSDK Agents</h2>
       
-      <p className="text-xl text-muted-foreground max-w-2xl mb-10">
+      <p className="text-2xl text-muted-foreground max-w-2xl mb-10">
         Build agents with AI SDK + ChatSDK that work across Slack, Discord, Teams, GitHub, and more
       </p>
 
-      <div className="flex flex-col gap-3 text-left max-w-xl w-full mb-8">
+      <div className="flex flex-col gap-3 text-left max-w-2xl w-full mb-8">
         {steps.map((step, i) => (
-          <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span className="text-primary font-bold text-sm">{i + 1}</span>
+          <div key={i} className="flex items-center gap-4 p-5 rounded-xl bg-card border border-border">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span className="text-primary font-bold text-base">{i + 1}</span>
             </div>
-            <p className="text-sm">{step}</p>
+            <p className="text-lg">{step}</p>
           </div>
         ))}
       </div>
 
-      <p className="text-sm text-muted-foreground">
+      <p className="text-base text-muted-foreground">
         Write once, deploy everywhere
       </p>
     </div>
@@ -563,47 +563,47 @@ function LetsBuildSlide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <h2 className="text-5xl md:text-7xl font-bold mb-4">Let&apos;s Build!</h2>
+      <h2 className="text-6xl md:text-8xl font-bold mb-4">Let&apos;s Build!</h2>
       
-      <p className="text-xl text-muted-foreground max-w-xl mb-8">
+      <p className="text-2xl text-muted-foreground max-w-xl mb-8">
         Scan for $30 free credits and to submit your project
       </p>
 
       <div className="p-6 bg-white rounded-2xl mb-6">
         <QRCodeSVG 
           value="https://zerotoagent.dev/event/RbeBMcn9EPsyxEld"
-          size={180}
+          size={200}
           level="H"
           includeMargin={false}
         />
       </div>
 
-      <p className="text-sm text-muted-foreground mb-8">
+      <p className="text-base text-muted-foreground mb-8">
         zerotoagent.dev/event/RbeBMcn9EPsyxEld
       </p>
 
-      <div className="flex flex-col gap-3 text-left max-w-md w-full">
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
-          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-            <span className="text-primary font-bold">1</span>
+      <div className="flex flex-col gap-3 text-left max-w-xl w-full">
+        <div className="flex items-center gap-4 p-5 rounded-xl bg-card border border-border">
+          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+            <span className="text-primary font-bold text-lg">1</span>
           </div>
-          <p>Grab your <span className="text-primary font-medium">$30 credits</span> code</p>
+          <p className="text-lg">Grab your <span className="text-primary font-medium">$30 credits</span> code</p>
         </div>
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
-          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-            <span className="text-primary font-bold">2</span>
+        <div className="flex items-center gap-4 p-5 rounded-xl bg-card border border-border">
+          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+            <span className="text-primary font-bold text-lg">2</span>
           </div>
-          <p>Redeem in <span className="text-primary font-medium">v0.dev</span> &rarr; Credits &rarr; Redeem usage code</p>
+          <p className="text-lg">Redeem in <span className="text-primary font-medium">v0.dev</span> &rarr; Credits &rarr; Redeem usage code</p>
         </div>
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
-          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-            <span className="text-primary font-bold">3</span>
+        <div className="flex items-center gap-4 p-5 rounded-xl bg-card border border-border">
+          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+            <span className="text-primary font-bold text-lg">3</span>
           </div>
-          <p>Submit your project <span className="text-primary font-medium">15 min before demos</span></p>
+          <p className="text-lg">Submit your project <span className="text-primary font-medium">15 min before demos</span></p>
         </div>
       </div>
 
-      <p className="mt-6 text-sm text-muted-foreground">
+      <p className="mt-6 text-base text-muted-foreground">
         Berto is available to help first-timers!
       </p>
     </div>
@@ -615,22 +615,22 @@ function ShareSlide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <h2 className="text-5xl md:text-7xl font-bold mb-6">Share Your Build!</h2>
+      <h2 className="text-6xl md:text-8xl font-bold mb-6">Share Your Build!</h2>
       
-      <p className="text-xl text-muted-foreground max-w-xl mb-12">
+      <p className="text-2xl text-muted-foreground max-w-xl mb-12">
         Post publicly across socials while you build
       </p>
 
-      <div className="px-8 py-6 rounded-2xl bg-card border border-border mb-10">
-        <p className="text-4xl md:text-5xl font-bold text-primary">#ZerotoAgent</p>
+      <div className="px-10 py-8 rounded-2xl bg-card border border-border mb-10">
+        <p className="text-5xl md:text-6xl font-bold text-primary">#ZerotoAgent</p>
       </div>
 
-      <div className="flex flex-col gap-4 max-w-md w-full">
-        <div className="p-5 rounded-xl bg-card border border-border">
-          <p className="text-lg">Share on <span className="text-primary font-medium">X, LinkedIn, Instagram</span></p>
+      <div className="flex flex-col gap-4 max-w-xl w-full">
+        <div className="p-6 rounded-xl bg-card border border-border">
+          <p className="text-xl">Share on <span className="text-primary font-medium">X, LinkedIn, Instagram</span></p>
         </div>
-        <div className="p-5 rounded-xl bg-card border border-border">
-          <p className="text-lg">Global submissions due <span className="text-primary font-medium">May 3</span></p>
+        <div className="p-6 rounded-xl bg-card border border-border">
+          <p className="text-xl">Global submissions due <span className="text-primary font-medium">May 3</span></p>
         </div>
       </div>
     </div>
@@ -642,24 +642,24 @@ function DemoTimeSlide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mb-8">
-        <Mic className="h-12 w-12 text-primary" />
+      <div className="w-28 h-28 rounded-full bg-primary/10 flex items-center justify-center mb-8">
+        <Mic className="h-14 w-14 text-primary" />
       </div>
       
-      <h2 className="text-5xl md:text-7xl font-bold mb-6">Demo Time!</h2>
+      <h2 className="text-6xl md:text-8xl font-bold mb-6">Demo Time!</h2>
       
-      <p className="text-xl text-muted-foreground max-w-xl mb-10">
+      <p className="text-2xl text-muted-foreground max-w-xl mb-10">
         Who wants to show what they built?
       </p>
 
-      <div className="flex flex-col gap-4 max-w-md w-full">
+      <div className="flex flex-col gap-4 max-w-xl w-full">
         <div className="p-6 rounded-2xl bg-card border border-border">
-          <p className="text-lg font-semibold mb-2">First come, first serve</p>
-          <p className="text-muted-foreground">Raise your hand when ready</p>
+          <p className="text-xl font-semibold mb-2">First come, first serve</p>
+          <p className="text-lg text-muted-foreground">Raise your hand when ready</p>
         </div>
         <div className="p-6 rounded-2xl bg-card border border-border">
-          <p className="text-lg font-semibold mb-2">2-3 minutes each</p>
-          <p className="text-muted-foreground">Show us the highlights</p>
+          <p className="text-xl font-semibold mb-2">2-3 minutes each</p>
+          <p className="text-lg text-muted-foreground">Show us the highlights</p>
         </div>
       </div>
     </div>
@@ -671,22 +671,22 @@ function ThankYouSlide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <h2 className="text-5xl md:text-7xl font-bold mb-8">Thank You!</h2>
+      <h2 className="text-6xl md:text-8xl font-bold mb-8">Thank You!</h2>
       
       {/* Logos row */}
-      <div className="flex items-center gap-6 mb-10">
-        <VercelLogo />
-        <span className="text-muted-foreground text-2xl">x</span>
-        <RootlyLogo />
-        <span className="text-muted-foreground text-2xl">x</span>
-        <MakersLoungeLogo />
+      <div className="flex items-center gap-8 mb-10">
+        <VercelLogo large />
+        <span className="text-muted-foreground text-3xl">x</span>
+        <RootlyLogo large />
+        <span className="text-muted-foreground text-3xl">x</span>
+        <MakersLoungeLogo large />
       </div>
 
-      <p className="text-xl text-muted-foreground max-w-xl mb-12">
+      <p className="text-2xl text-muted-foreground max-w-xl mb-12">
         Keep building. Keep shipping. Stay connected.
       </p>
 
-      <p className="text-lg text-muted-foreground">
+      <p className="text-xl text-muted-foreground">
         Submit your projects to the global competition for $6,000+ in prizes!
       </p>
     </div>
@@ -698,27 +698,27 @@ function SubmissionSlide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <h2 className="text-5xl md:text-7xl font-bold mb-4">Submit Your Project</h2>
+      <h2 className="text-6xl md:text-8xl font-bold mb-4">Submit Your Project</h2>
       
-      <p className="text-xl text-muted-foreground max-w-xl mb-10">
+      <p className="text-2xl text-muted-foreground max-w-xl mb-10">
         Scan to submit for the global competition
       </p>
 
       <div className="p-6 bg-white rounded-2xl mb-6">
         <QRCodeSVG 
           value="https://community.vercel.com/hackathons/zero-to-agent"
-          size={220}
+          size={240}
           level="H"
           includeMargin={false}
         />
       </div>
 
-      <p className="text-sm text-muted-foreground mb-8">
+      <p className="text-base text-muted-foreground mb-8">
         community.vercel.com/hackathons/zero-to-agent
       </p>
 
-      <div className="p-5 rounded-xl bg-card border border-border">
-        <p className="text-lg">Submissions due <span className="text-primary font-bold">May 3</span></p>
+      <div className="p-6 rounded-xl bg-card border border-border">
+        <p className="text-xl">Submissions due <span className="text-primary font-bold">May 3</span></p>
       </div>
     </div>
   )
