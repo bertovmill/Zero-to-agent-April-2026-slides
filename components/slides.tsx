@@ -24,6 +24,7 @@ const slides = [
   { id: "share", component: ShareSlide, time: "6:45 PM", label: "Build Time" },
   { id: "demo-time", component: DemoTimeSlide, time: "7:45 PM", label: "Demos" },
   { id: "thank-you", component: ThankYouSlide, time: "8:30 PM", label: "Wrap-up" },
+  { id: "submission", component: SubmissionSlide, time: "8:30 PM", label: "Wrap-up" },
 ]
 
 export function Slides() {
@@ -675,10 +676,41 @@ function ThankYouSlide() {
   )
 }
 
+function SubmissionSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <h2 className="text-5xl md:text-7xl font-bold mb-4">Submit Your Project</h2>
+      
+      <p className="text-xl text-muted-foreground max-w-xl mb-10">
+        Scan to submit for the global competition
+      </p>
+
+      <div className="p-6 bg-white rounded-2xl mb-6">
+        <QRCodeSVG 
+          value="https://puzzled-hibiscus-bda.notion.site/352ea76f959d802eb228ceb8933d7c20"
+          size={220}
+          level="H"
+          includeMargin={false}
+        />
+      </div>
+
+      <p className="text-sm text-muted-foreground mb-8 max-w-md break-all">
+        puzzled-hibiscus-bda.notion.site/352ea76f959d802eb228ceb8933d7c20
+      </p>
+
+      <div className="p-5 rounded-xl bg-card border border-border">
+        <p className="text-lg">Submissions due <span className="text-primary font-bold">May 3</span></p>
+      </div>
+    </div>
+  )
+}
+
 // Logo Components
 function VercelTriangle({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 76 65" fill="currentColor">
+  <svg className={className} viewBox="0 0 76 65" fill="currentColor">
       <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
     </svg>
   )
