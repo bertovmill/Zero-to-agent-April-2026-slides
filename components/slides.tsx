@@ -499,19 +499,19 @@ function LetsBuildSlide() {
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <span className="text-primary font-bold">1</span>
           </div>
-          <p>Open <span className="text-primary font-medium">v0.dev</span> and start building</p>
+          <p>Grab your <span className="text-primary font-medium">$30 credits</span> code</p>
         </div>
         <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <span className="text-primary font-bold">2</span>
           </div>
-          <p>Build your AI agent idea</p>
+          <p>Redeem in <span className="text-primary font-medium">v0.dev</span> &rarr; Credits &rarr; Redeem usage code</p>
         </div>
         <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <span className="text-primary font-bold">3</span>
           </div>
-          <p>Submit 15 min before demos!</p>
+          <p>Submit your project <span className="text-primary font-medium">15 min before demos</span></p>
         </div>
       </div>
 
