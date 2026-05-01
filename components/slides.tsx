@@ -762,16 +762,26 @@ function ZazenCodesSlide() {
     <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
       <WifiBadge />
       
-      <h2 className="text-6xl md:text-8xl font-bold mb-4">Subscribe to ZazenCodes</h2>
+      <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary mb-6">
+        <Image 
+          src="/images/zazencodes-profile.jpg" 
+          alt="ZazenCodes" 
+          width={128} 
+          height={128}
+          className="w-full h-full object-cover"
+        />
+      </div>
       
-      <p className="text-2xl text-muted-foreground max-w-xl mb-10">
+      <h2 className="text-5xl md:text-7xl font-bold mb-4">Subscribe to ZazenCodes</h2>
+      
+      <p className="text-2xl text-muted-foreground max-w-xl mb-8">
         Tutorials, builds, and more
       </p>
 
       <div className="p-6 bg-white rounded-2xl mb-6">
         <QRCodeSVG 
           value="https://www.youtube.com/@ZazenCodes"
-          size={240}
+          size={200}
           level="H"
           includeMargin={false}
         />
