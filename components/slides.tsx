@@ -27,6 +27,7 @@ const slides = [
   { id: "demo-time", component: DemoTimeSlide, time: "7:45 PM", label: "Demos" },
   { id: "thank-you", component: ThankYouSlide, time: "8:30 PM", label: "Wrap-up" },
   { id: "submission", component: SubmissionSlide, time: "8:30 PM", label: "Wrap-up" },
+  { id: "zazencodes", component: ZazenCodesSlide, time: "8:30 PM", label: "Wrap-up" },
 ]
 
 export function Slides() {
@@ -756,7 +757,34 @@ function SubmissionSlide() {
   )
 }
 
-// Logo Components
+function ZazenCodesSlide() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-8 text-center relative">
+      <WifiBadge />
+      
+      <h2 className="text-6xl md:text-8xl font-bold mb-4">Subscribe to ZazenCodes</h2>
+      
+      <p className="text-2xl text-muted-foreground max-w-xl mb-10">
+        Tutorials, builds, and more
+      </p>
+
+      <div className="p-6 bg-white rounded-2xl mb-6">
+        <QRCodeSVG 
+          value="https://www.youtube.com/@ZazenCodes"
+          size={240}
+          level="H"
+          includeMargin={false}
+        />
+      </div>
+
+      <p className="text-base text-muted-foreground">
+        youtube.com/@ZazenCodes
+      </p>
+    </div>
+  )
+}
+  
+  // Logo Components
 function VercelTriangle({ className }: { className?: string }) {
   return (
   <svg className={className} viewBox="0 0 76 65" fill="currentColor">
